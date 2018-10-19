@@ -1,0 +1,19 @@
+{
+  "name": "juice.js",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Simon Lagos <simon.lagos.sallhed@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "clean": "rm -rf dist",
+    "clean-build": "npm run clean && npm run build",
+    "build": "babel src --out-dir dist",
+    "build:watch": "npm run build -- --watch",
+    "patch": "npm version patch -m 'Upgrade to %s'"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-register": "^6.26.0"
+  }
+}
