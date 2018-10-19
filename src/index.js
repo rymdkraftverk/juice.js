@@ -32,6 +32,15 @@ export const parabola = ({
   return offset + ((Math.abs(start - end) * modifier) * (normalizer * (t - start) * (t - end)));
 };
 
+export const parabolaAngle = ({
+  start,
+  end,
+  modifier = 1,
+}) => (x) => {
+  const normalizer = getNormalizer(start, end);
+  return Math.atan((Math.abs(start - end) * modifier) * normalizer * ((2 * x) - start - end));
+};
+
 export const sine = ({
   start, end, speed,
 }) => (t) => {
