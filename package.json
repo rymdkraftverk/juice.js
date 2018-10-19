@@ -12,8 +12,8 @@
     "patch": "npm version patch -m 'Upgrade to %s'"
   },
   "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-preset-env": "^1.7.0",
-    "babel-register": "^6.26.0"
+    "eslint": "^5.7.0",
+    "l1": "^0.5.0",
+    "pixi.js": "^4.8.2"
   }
 }
