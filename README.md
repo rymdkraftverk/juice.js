@@ -1,5 +1,7 @@
 # juice.js
 
+For an introduction to the importance of juice, see the following [video](https://youtu.be/Fy0aCDmgnxg)
+
 - Simple API
 - Immutable functions
 - Zero dependencies
