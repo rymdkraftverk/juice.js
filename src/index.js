@@ -1,5 +1,11 @@
 const getNormalizer = (x1, x2) => (4 / ((x1 ** 2) + (x2 ** 2)));
 
+export const easeIn = ({
+  end,
+  modifier = 1,
+  maxSpeed = 10,
+}) => x => Math.min(modifier / Math.abs((end - x)), maxSpeed);
+
 export const easeInOut = ({
   start, end, duration, startTime = 0,
 }) => {
@@ -13,6 +19,11 @@ export const easeInOut = ({
 
   return t => (speed * ((t - timeOffset) ** 3)) + positionOffset;
 };
+
+export const easeOut = ({
+  end,
+  minSpeed = 0.5,
+}) => x => Math.max(Math.abs((end - x)) * 0.1, minSpeed);
 
 export const parabola = ({
   start, end, offset, modifier = 1,
