@@ -1,6 +1,8 @@
 # juice.js
 
+API
 
+sine({ start, end, speed }) => (time) => coordinate
 
 TODO
 
