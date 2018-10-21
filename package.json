@@ -8,6 +8,7 @@
     "clean": "rm -rf dist",
     "build": "babel src --out-dir dist",
     "build:watch": "npm run build -- --watch",
+    "lint": "eslint src",
     "release": "np"
   },
   "devDependencies": {
