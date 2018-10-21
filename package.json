@@ -1,7 +1,7 @@
 {
   "name": "juice.js",
   "version": "1.0.2",
-  "main": "src/index.js",
+  "main": "./dist/index.js",
   "author": "Simon Lagos <simon.lagos.sallhed@gmail.com>",
   "license": "MIT",
   "scripts": {
@@ -12,6 +12,9 @@
     "release": "np"
   },
   "devDependencies": {
+    "@babel/cli": "^7.1.2",
+    "@babel/core": "^7.1.2",
+    "@babel/preset-env": "^7.1.0",
     "eslint": "^5.7.0",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "2.14.0",
