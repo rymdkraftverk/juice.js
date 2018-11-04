@@ -8,7 +8,7 @@ For an introduction to the importance of juice, see the following [video](https:
 
 All functions return a function with the signature `(time) => number`
 
-The returned number is commonly used for setting the position of an element, but could be used for anything.
+The returned number can be used to animate any property of a visual element, such as the position, scale and opacity.
 
 ## API
 
