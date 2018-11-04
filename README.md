@@ -1,4 +1,4 @@
-# juice.js
+# juice.js :tropical_drink:
 
 For an introduction to the importance of juice, see the following [video](https://youtu.be/Fy0aCDmgnxg)
 
