@@ -2,13 +2,15 @@
 
 For an introduction to the importance of juice, see the following [video](https://youtu.be/Fy0aCDmgnxg)
 
-- Simple API
 - Immutable functions
+- Simple API
 - Zero dependencies
 
 All functions return a function with the signature `(time) => number`
 
 The returned number can be used to animate any property of a visual element, such as the position, scale and opacity.
+
+## Example code
 
 ## API
 
@@ -27,8 +29,10 @@ sine = ({ start, end, speed }) => (time) => number
 easeIn
 easeOut
 parabolaAngle
+linear
 
 - [ ] Setup an examples page, using pixi and level1 to demonstrate all the functions
 - [ ] Online editor where you can play around with values
 - [ ] Good documentation
 - Currying? 
+- Good error messages
