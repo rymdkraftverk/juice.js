@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { createGlobalStyle } from 'styled-components/macro'
 import App from './App';
+import * as juice from 'juice.js'
 import * as serviceWorker from './serviceWorker';
 
 const GlobalStyles = createGlobalStyle`

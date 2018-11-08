@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "juice.js": "file:../",
     "l1": "^0.5.13",
     "pixi.js": "^4.8.2",
     "react": "^16.7.0-alpha.0",
@@ -11,6 +12,7 @@
     "styled-components": "^4.0.3"
   },
   "scripts": {
+    "juice": "yarn add file:../",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
