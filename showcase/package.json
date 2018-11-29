@@ -3,13 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "juice.js": "file:../",
-    "l1": "^0.5.13",
+    "juice.js": "file:..",
+    "l1": "^0.5.18",
+    "lodash": "4.17.11",
     "pixi.js": "^4.8.2",
-    "react": "^16.7.0-alpha.0",
-    "react-dom": "^16.7.0-alpha.0",
+    "react": "^16.7.0-alpha.2",
+    "react-dom": "^16.7.0-alpha.2",
     "react-scripts": "2.1.1",
-    "styled-components": "^4.0.3"
+    "styled-components": "^4.1.2"
   },
   "scripts": {
     "juice": "yarn add file:../",
@@ -26,5 +27,12 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "devDependencies": {
+    "prettier": "1.15.2",
+    "stylelint": "9.9.0",
+    "stylelint-config-standard": "18.2.0",
+    "stylelint-config-styled-components": "0.1.1",
+    "stylelint-processor-styled-components": "1.5.1"
+  }
 }
