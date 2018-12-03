@@ -34,7 +34,7 @@ export const parabola = ({
   start, end, offset, modifier = 1,
 }) => (t) => {
   const normalizer = getNormalizer(start, end);
-  return offset + ((Math.abs(start - end) * modifier) * (normalizer * (t - start) * (t - end)));
+  return -(offset + ((Math.abs(start - end) * modifier) * (normalizer * (t - start) * (t - end))));
 };
 
 export const parabolaAngle = ({

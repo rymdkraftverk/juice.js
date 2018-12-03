@@ -3,25 +3,12 @@ import * as juice from "juice.js";
 import * as PIXI from "pixi.js";
 import * as l1 from "l1";
 import _ from "lodash/fp";
-import addFeature from "../addFeature";
 import styled from "styled-components";
+import { useDebounce } from "use-debounce";
+import addFeature from "../addFeature";
 import Controls from "./Controls";
 
 const Y_MARGIN = 120;
-
-const Title = styled.div`
-  font-weight: bold;
-  font-size: 24px;
-  margin: 24px;
-`;
-
-const Canvas = styled.div``;
-
-const Container = styled.div`
-  display: flex;
-`;
-
-const ControlPanel = styled.div``;
 
 const FeatureList = [
   [
@@ -45,14 +32,41 @@ const FeatureList = [
       },
       function: juice.easeInOut
     }
+  ],
+  [
+    "parabola",
+    {
+      parameters: {
+        start: 100,
+        end: 700,
+        offset: 0,
+        modifier: 1
+      },
+      function: juice.parabola
+    }
   ]
 ];
 
-const updateParameter = (features, setFeatures) => (
+const Title = styled.div`
+  font-weight: bold;
+  font-size: 24px;
+  margin: 24px;
+`;
+
+const Canvas = styled.div``;
+
+const Container = styled.div`
+  display: flex;
+`;
+
+const ControlPanel = styled.div``;
+
+const updateParameter = (features, setFeatures, setUpdatedFeature) => (
   featureName,
   parameter,
   value
 ) => {
+  setUpdatedFeature(featureName);
   setFeatures(
     features.map(([key, feature]) => {
       if (key === featureName) {
@@ -75,7 +89,9 @@ const updateParameter = (features, setFeatures) => (
 const App = () => {
   const [app, setApp] = React.useState(null);
   const [features, setFeatures] = React.useState(FeatureList);
-  console.log("features", features);
+  const [updatedFeature, setUpdatedFeature] = React.useState(null);
+  const debouncedFeatures = useDebounce(features, 500);
+
   React.useEffect(() => {
     if (!app) {
       const _app = new PIXI.Application({ backgroundColor: 0xff00ff });
@@ -87,16 +103,28 @@ const App = () => {
 
   React.useEffect(
     () => {
-      l1.getAll().forEach(l1.destroy);
-      l1.getAllBehaviors().forEach(l1.removeBehavior);
-      _.map.convert({ cap: false })(([, feature], index) => {
-        addFeature({
-          getX: feature.function(feature.parameters),
-          y: index * Y_MARGIN
-        });
+      l1.destroy(updatedFeature);
+      l1.removeBehavior(updatedFeature);
+
+      _.forEach.convert({ cap: false })(([key, feature], index) => {
+        if (updatedFeature) {
+          if (key === updatedFeature) {
+            addFeature({
+              id: key,
+              getX: feature.function(feature.parameters),
+              y: index * Y_MARGIN
+            });
+          }
+        } else {
+          addFeature({
+            id: key,
+            getX: feature.function(feature.parameters),
+            y: index * Y_MARGIN
+          });
+        }
       })(features);
     },
-    [features]
+    [debouncedFeatures]
   );
 
   return (
@@ -111,7 +139,11 @@ const App = () => {
                 key={key}
                 name={key}
                 controls={feature.parameters}
-                onChange={updateParameter(features, setFeatures)}
+                onChange={updateParameter(
+                  features,
+                  setFeatures,
+                  setUpdatedFeature
+                )}
               />
             );
           })(features)}
