@@ -7,45 +7,9 @@ import styled from "styled-components";
 import { useDebounce } from "use-debounce";
 import addFeature from "../addFeature";
 import Controls from "./Controls";
+import FeatureList from "../FeatureList";
 
 const Y_MARGIN = 120;
-
-const FeatureList = [
-  [
-    "sine",
-    {
-      parameters: {
-        start: 100,
-        end: 700,
-        speed: 180
-      },
-      function: juice.sine
-    }
-  ],
-  [
-    "easeInOut",
-    {
-      parameters: {
-        start: 100,
-        end: 600,
-        duration: 120
-      },
-      function: juice.easeInOut
-    }
-  ],
-  [
-    "parabola",
-    {
-      parameters: {
-        start: 100,
-        end: 700,
-        offset: 0,
-        modifier: 1
-      },
-      function: juice.parabola
-    }
-  ]
-];
 
 const Title = styled.div`
   font-weight: bold;
@@ -111,14 +75,14 @@ const App = () => {
           if (key === updatedFeature) {
             addFeature({
               id: key,
-              getX: feature.function(feature.parameters),
+              getX: juice[key](feature.parameters),
               y: index * Y_MARGIN
             });
           }
         } else {
           addFeature({
             id: key,
-            getX: feature.function(feature.parameters),
+            getX: juice[key](feature.parameters),
             y: index * Y_MARGIN
           });
         }

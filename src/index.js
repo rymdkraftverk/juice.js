@@ -46,9 +46,10 @@ export const parabolaAngle = ({
   return Math.atan((Math.abs(start - end) * modifier) * normalizer * ((2 * x) - start - end));
 };
 
+// TODO: where to start in the animation: phase shift
 export const sine = ({
-  start, end, speed,
+  start, end, duration,
 }) => (t) => {
   const middle = ((start + end) / 2);
-  return middle + ((middle - start) * Math.sin((t * Math.PI * 2) / speed));
+  return middle + ((middle - start) * Math.sin((t * Math.PI * 2) / duration));
 };
