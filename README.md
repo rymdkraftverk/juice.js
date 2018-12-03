@@ -16,19 +16,9 @@ For an introduction to the importance of juice, see the following [video](https:
 
 The returned value can be used to animate any property of a visual element, such as the position, scale and opacity.
 
+[Full API docs]((https://rymdkraftverk.github.io/juice.js/))
+
 ## Example code
-
-## API
-
-easeInOut = ({
-start, end, duration, startTime = 0,
-}) => (time) => number
-
-parabola = ({
-start, end, offset, modifier = 1,
-}) => (time) => number
-
-sine = ({ start, end, speed }) => (time) => number
 
 ### General usage with a fictitious rendering library
 
@@ -78,6 +68,19 @@ app.ticker.add(() => {
 });
 ```
 
+## Develop
+
+### Custom commands
+
+Command | Description
+------- | -----------
+`yarn build` | Generate files in the `dist` folder
+`yarn build:watch` | Continuously build files in the `dist` folder
+`yarn clean` | Remove the `dist` folder
+`yarn release` | Start the process to release a new version
+
+Use the `showcase` app to test any updates. If the public API is changed, also update the `src/FeatureList` file.
+
 ## TODO
 
 easeIn
@@ -88,5 +91,3 @@ linear
 - [ ] Good documentation
 - Currying?
 - Good error messages
-
-Rename speed to duration?
