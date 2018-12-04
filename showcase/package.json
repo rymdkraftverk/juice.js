@@ -9,12 +9,13 @@
     "pixi.js": "^4.8.2",
     "react": "^16.7.0-alpha.2",
     "react-dom": "^16.7.0-alpha.2",
+    "react-emojione": "^5.0.0",
     "react-scripts": "2.1.1",
     "styled-components": "^4.1.2",
     "use-debounce": "0.0.7"
   },
   "scripts": {
-    "juice": "yarn add file:../",
+    "juice": "npm link ../",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",

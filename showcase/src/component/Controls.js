@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import _ from "lodash/fp";
+import Emojify from "react-emojione";
 
 const Container = styled.div`
   margin: 32px 32px;
@@ -33,11 +34,28 @@ const Input = styled.input`
   text-align: right;
 `;
 
-const Controls = ({ controls, name, onChange, height }) => {
+const RefreshButton = styled.div`
+  cursor: pointer;
+`;
+
+const Controls = ({
+  controls,
+  name,
+  onChange,
+  height,
+  onRefreshClick,
+  isRefreshable
+}) => {
   return (
     <Container height={height}>
       <Name>{name}</Name>
-      <Parameters>
+      <Emojify>
+        {isRefreshable && (
+          <RefreshButton
+            onClick={() => onRefreshClick(name)}
+          >{`:arrows_counterclockwise:`}</RefreshButton>
+        )}
+      </Emojify>
       {_.map.convert({ cap: false })((value, key) => {
         return (
           <Parameter key={key}>
@@ -52,7 +70,6 @@ const Controls = ({ controls, name, onChange, height }) => {
           </Parameter>
         );
       })(controls)}
-      </Parameters>
     </Container>
   );
 };

@@ -7,6 +7,7 @@ export default [
         end: 700,
         duration: 180
       },
+      isRefreshable: false
     }
   ],
   [
@@ -17,6 +18,7 @@ export default [
         end: 600,
         duration: 120
       },
+      isRefreshable: true
     }
   ],
   [
@@ -28,6 +30,7 @@ export default [
         offset: 0,
         modifier: 1
       },
+      isRefreshable: true
     }
   ]
 ];

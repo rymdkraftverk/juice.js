@@ -8,8 +8,9 @@ import { useDebounce } from "use-debounce";
 import addFeature from "../addFeature";
 import Controls from "./Controls";
 import FeatureList from "../FeatureList";
+import Emojify from "react-emojione";
 
-const Y_MARGIN = 120;
+const Y_MARGIN = 160;
 
 const Title = styled.div`
   font-weight: bold;
@@ -54,6 +55,7 @@ const App = () => {
   const [app, setApp] = React.useState(null);
   const [features, setFeatures] = React.useState(FeatureList);
   const [updatedFeature, setUpdatedFeature] = React.useState(null);
+  const [refreshFeature, setRefreshFeature] = React.useState(null);
   const debouncedFeatures = useDebounce(features, 500);
 
   React.useEffect(() => {
@@ -91,9 +93,21 @@ const App = () => {
     [debouncedFeatures]
   );
 
+  React.useEffect(
+    () => {
+      if (refreshFeature) {
+        l1.resetBehavior(refreshFeature);
+        setRefreshFeature(null);
+      }
+    },
+    [refreshFeature]
+  );
+
   return (
     <React.StrictMode>
-      <Title>juice.js</Title>
+      <Emojify>
+        <Title>juice.js :tropical_drink:</Title>
+      </Emojify>
       <Container>
         <ControlPanel>
           {_.map.convert({ cap: false })(([key, feature]) => {
@@ -103,6 +117,8 @@ const App = () => {
                 key={key}
                 name={key}
                 controls={feature.parameters}
+                onRefreshClick={setRefreshFeature}
+                isRefreshable={feature.isRefreshable}
                 onChange={updateParameter(
                   features,
                   setFeatures,
