@@ -5,7 +5,7 @@ export default [
       parameters: {
         start: 100,
         end: 700,
-        speed: 180
+        duration: 180
       },
     }
   ],
