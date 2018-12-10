@@ -14,9 +14,6 @@ For an introduction to the importance of juice, see the following [video](https:
 
 - **Zero dependencies**
 
-
-The returned value can be used to animate any property of a visual element, such as the position, scale and opacity.
-
 [Full API docs](https://rymdkraftverk.github.io/juice.js/)
 
 ## How to use
@@ -31,7 +28,9 @@ const getX = juice.sine({
 })
 ```
 
-They all return another function with the signature `(time) => value`. This can then be called in an update loop:
+They all return another function with the signature `(time) => value`. 
+
+This can then be called in an update loop:
 
 ```js
 update((time) => {
@@ -39,7 +38,9 @@ update((time) => {
 })
 ```
 
-All functions expect that `time` is an integer that starts at 0.
+The returned value can be used to animate any property of a visual element, such as the position, scale and opacity.
+
+All functions expect that `time` is an integer that starts at 0.l
 
 ## Example code
 
