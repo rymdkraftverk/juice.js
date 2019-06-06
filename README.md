@@ -40,7 +40,7 @@ update((time) => {
 
 The returned value can be used to animate any property of a visual element, such as the position, scale and opacity.
 
-All functions expect that `time` is an integer that starts at 0.l
+All functions expect that `time` is an integer that starts at 0.
 
 ## Example code
 
