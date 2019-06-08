@@ -3,16 +3,16 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "juice.js": "file:../",
-    "l1": "^0.5.18",
+    "juice.js": "file:..",
+    "l1": "0.5.28",
     "lodash": "4.17.11",
-    "pixi.js": "^4.8.2",
-    "react": "^16.7.0-alpha.2",
-    "react-dom": "^16.7.0-alpha.2",
-    "react-emojione": "^5.0.0",
-    "react-scripts": "2.1.1",
-    "styled-components": "^4.1.2",
-    "use-debounce": "0.0.7"
+    "pixi.js": "5.0.4",
+    "react": "16.8.6",
+    "react-dom": "16.8.6",
+    "react-emojione": "5.0.1",
+    "react-scripts": "3.0.1",
+    "styled-components": "4.3.1",
+    "use-debounce": "2.1.0"
   },
   "scripts": {
     "juice": "npm link ../",
@@ -31,10 +31,10 @@
     "not op_mini all"
   ],
   "devDependencies": {
-    "prettier": "1.15.2",
-    "stylelint": "9.9.0",
-    "stylelint-config-standard": "18.2.0",
+    "prettier": "1.18.2",
+    "stylelint": "10.1.0",
+    "stylelint-config-standard": "18.3.0",
     "stylelint-config-styled-components": "0.1.1",
-    "stylelint-processor-styled-components": "1.5.1"
+    "stylelint-processor-styled-components": "1.8.0"
   }
 }
