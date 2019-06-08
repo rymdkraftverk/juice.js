@@ -9,7 +9,7 @@ export default ({ id, getX, y }) => {
   const instance = new PIXI.Graphics();
   instance
     .clear()
-    .beginFill(0x000000)
+    .beginFill(0xffffff)
     .drawRect(0, y, 32, 32)
     .endFill();
   l1.add(instance, { id });

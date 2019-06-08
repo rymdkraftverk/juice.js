@@ -3,19 +3,20 @@ import * as juice from "juice.js";
 import * as PIXI from "pixi.js";
 import * as l1 from "l1";
 import _ from "lodash/fp";
-import styled from "styled-components";
+import styled from "styled-components/macro";
 import { useDebounce } from "use-debounce";
 import addFeature from "../addFeature";
 import Controls from "./Controls";
 import FeatureList from "../FeatureList";
 import Emojify from "react-emojione";
+import Color from '../color';
 
 const Y_MARGIN = 160;
+const Y_OFFSET = 80;
 
 const Title = styled.div`
   font-weight: bold;
   font-size: 24px;
-  margin: 24px;
 `;
 
 const Canvas = styled.div``;
@@ -25,6 +26,29 @@ const Container = styled.div`
 `;
 
 const ControlPanel = styled.div``;
+
+const Logo = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 180px;
+  background-color: ${Color.BLUE};
+  height: 100%;
+`;
+
+const Header = styled.div`
+  height: 70px;
+  margin-bottom: 32px;
+  background-color: ${Color.LIGHTER_GRAY};
+  display: flex;
+  align-items: center;
+`;
+
+const Link = styled.div`
+  margin-left: 64px;
+  font-weight: bold;
+  cursor: pointer;
+`;
 
 const updateParameter = (features, setFeatures, setUpdatedFeature) => (
   featureName,
@@ -60,13 +84,14 @@ const App = () => {
 
   useEffect(() => {
     if (!app) {
-      const _app = new PIXI.Application({ backgroundColor: 0xff00ff });
+      const _app = new PIXI.Application({ backgroundColor: l1.convertColorHex(Color.BLUE) });
       document.getElementById("canvas").appendChild(_app.view);
       setApp(_app);
       l1.init(_app);
     }
   }, [app]);
 
+  console.log('rerender!')
 
   useEffect(
     () => {
@@ -76,14 +101,14 @@ const App = () => {
             addFeature({
               id: key,
               getX: juice[key](feature.parameters),
-              y: index * Y_MARGIN
+              y: Y_OFFSET + index * Y_MARGIN
             });
           }
         } else {
           addFeature({
             id: key,
             getX: juice[key](feature.parameters),
-            y: index * Y_MARGIN
+            y: Y_OFFSET + index * Y_MARGIN
           });
         }
       })(features);
@@ -103,9 +128,19 @@ const App = () => {
 
   return (
     <React.StrictMode>
-      <Emojify>
-        <Title>juice.js :tropical_drink:</Title>
-      </Emojify>
+      <Header>
+        <Logo>
+          <Emojify>
+            <Title>juice.js :tropical_drink:</Title>
+          </Emojify>
+        </Logo>
+        <Link>
+          DOCS
+        </Link>
+        <Link>
+          GITHUB
+        </Link>
+      </Header>
       <Container>
         <ControlPanel>
           {_.map.convert({ cap: false })(([key, feature]) => {

@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import { createGlobalStyle } from "styled-components/macro";
 import App from "./component/App";
 import * as serviceWorker from "./serviceWorker";
+import Color from './color';
 
 const GlobalStyles = createGlobalStyle`
   body {
@@ -22,6 +23,8 @@ const GlobalStyles = createGlobalStyle`
       sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    background-color: ${Color.GRAY};
+    color: ${Color.WHITE};
   }
 `;
 
