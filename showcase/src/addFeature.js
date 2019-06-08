@@ -6,12 +6,18 @@ export default ({ id, getX, y }) => {
   l1.destroy(id);
   l1.removeBehavior(id);
   
-  const instance = new PIXI.Graphics();
-  instance
-    .clear()
-    .beginFill(0xffffff)
-    .drawRect(0, y, 32, 32)
-    .endFill();
+  const instance = PIXI.Sprite.from('asset/pig.png')
+  instance.x = 0
+  instance.y = y
+  // instance.width = 32
+  // instance.height = 32
+  
+  // const instance = new PIXI.Graphics();
+  // instance
+  //   .clear()
+  //   .beginFill(0xffffff)
+  //   .drawRect(0, y, 32, 32)
+  //   .endFill();
   l1.add(instance, { id });
 
   l1.addBehavior({
