@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import * as juice from "juice.js";
 import * as PIXI from "pixi.js";
 import * as l1 from "l1";
@@ -52,26 +52,24 @@ const updateParameter = (features, setFeatures, setUpdatedFeature) => (
 };
 
 const App = () => {
-  const [app, setApp] = React.useState(null);
-  const [features, setFeatures] = React.useState(FeatureList);
-  const [updatedFeature, setUpdatedFeature] = React.useState(null);
-  const [refreshFeature, setRefreshFeature] = React.useState(null);
+  const [app, setApp] = useState(null);
+  const [features, setFeatures] = useState(FeatureList);
+  const [updatedFeature, setUpdatedFeature] = useState(null);
+  const [refreshFeature, setRefreshFeature] = useState(null);
   const debouncedFeatures = useDebounce(features, 500);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (!app) {
       const _app = new PIXI.Application({ backgroundColor: 0xff00ff });
       document.getElementById("canvas").appendChild(_app.view);
       setApp(_app);
       l1.init(_app);
     }
-  });
+  }, [app]);
 
-  React.useEffect(
+
+  useEffect(
     () => {
-      l1.destroy(updatedFeature);
-      l1.removeBehavior(updatedFeature);
-
       _.forEach.convert({ cap: false })(([key, feature], index) => {
         if (updatedFeature) {
           if (key === updatedFeature) {
@@ -90,10 +88,10 @@ const App = () => {
         }
       })(features);
     },
-    [debouncedFeatures]
+    [debouncedFeatures, features, updatedFeature]
   );
 
-  React.useEffect(
+  useEffect(
     () => {
       if (refreshFeature) {
         l1.resetBehavior(refreshFeature);
