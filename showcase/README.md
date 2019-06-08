@@ -5,3 +5,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 TODO: Button to copy config
 explain parameters
 Rerun button?
+
+## Develop
+
+`yarn start` - Start the dev server. Default port `3000`.
