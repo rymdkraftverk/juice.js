@@ -14,6 +14,9 @@ import Color from '../color';
 const Y_MARGIN = 160;
 const Y_OFFSET = 80;
 
+const DOCS_URL = 'https://rymdkraftverk.github.io/juice.js'
+const GITHUB_URL = 'https://github.com/rymdkraftverk/juice.js'
+
 const Title = styled.div`
   font-weight: bold;
   font-size: 24px;
@@ -44,7 +47,7 @@ const Header = styled.div`
   align-items: center;
 `;
 
-const Link = styled.div`
+const Link = styled.a`
   margin-left: 64px;
   font-weight: bold;
   cursor: pointer;
@@ -134,10 +137,10 @@ const App = () => {
             <Title>juice.js :tropical_drink:</Title>
           </Emojify>
         </Logo>
-        <Link>
+        <Link href={DOCS_URL}>
           DOCS
         </Link>
-        <Link>
+        <Link href={GITHUB_URL}>
           GITHUB
         </Link>
       </Header>

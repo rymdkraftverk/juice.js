@@ -26,6 +26,12 @@ const GlobalStyles = createGlobalStyle`
     background-color: ${Color.GRAY};
     color: ${Color.WHITE};
   }
+
+  /* Remove link default style */
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
 `;
 
 ReactDOM.render(
