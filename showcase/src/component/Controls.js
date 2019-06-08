@@ -1,12 +1,22 @@
 import React from "react";
-import styled from "styled-components";
+import styled from "styled-components/macro";
 import _ from "lodash/fp";
 import Emojify from "react-emojione";
 
+import Color from "../constant/color";
+import Size from "../constant/size";
+
 const Container = styled.div`
-  margin: 32px 32px;
-  width: 150px;
+  width: ${Size.LEFT_COLUMN_WIDTH}px;
   height: ${props => props.height}px;
+`;
+
+const Header = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: ${Color.LIGHTER_GRAY};
+  padding: 4px 16px;
 `;
 
 const Name = styled.div`
@@ -14,24 +24,21 @@ const Name = styled.div`
   margin: 8px 0;
 `;
 
-const Parameters = styled.div`
-  border: 3px solid lightgray;
-`;
-
 const Parameter = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin: 8px 0;
+  padding-left: 32px;
 `;
 
 const Input = styled.input`
   width: 48px;
-  font-size: 12px;
-  padding: 4px;
-  border: 2px solid lightgray;
-  border-radius: 4px;
-  text-align: right;
+  font-size: 14px;
+  font-weight: bold;
+  padding: 8px;
+  border: none;
+  text-align: center;
 `;
 
 const RefreshButton = styled.div`
@@ -48,14 +55,16 @@ const Controls = ({
 }) => {
   return (
     <Container height={height}>
-      <Name>{name}</Name>
-      <Emojify>
-        {isRefreshable && (
-          <RefreshButton
-            onClick={() => onRefreshClick(name)}
-          >{`:arrows_counterclockwise:`}</RefreshButton>
-        )}
-      </Emojify>
+      <Header>
+        <Name>{name}</Name>
+        <Emojify>
+          {isRefreshable && (
+            <RefreshButton
+              onClick={() => onRefreshClick(name)}
+            >{`:arrows_counterclockwise:`}</RefreshButton>
+          )}
+        </Emojify>
+      </Header>
       {_.map.convert({ cap: false })((value, key) => {
         return (
           <Parameter key={key}>

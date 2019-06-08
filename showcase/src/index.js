@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import { createGlobalStyle } from "styled-components/macro";
 import App from "./component/App";
 import * as serviceWorker from "./serviceWorker";
-import Color from './color';
+import Color from "./constant/color";
 
 const GlobalStyles = createGlobalStyle`
   body {

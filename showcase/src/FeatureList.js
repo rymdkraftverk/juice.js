@@ -32,5 +32,38 @@ export default [
       },
       isRefreshable: true
     }
+  ],
+  [
+    "sine",
+    {
+      parameters: {
+        start: 100,
+        end: 700,
+        duration: 180
+      },
+      isRefreshable: false
+    }
+  ],
+  [
+    "sine",
+    {
+      parameters: {
+        start: 100,
+        end: 700,
+        duration: 180
+      },
+      isRefreshable: false
+    }
+  ],
+  [
+    "sine",
+    {
+      parameters: {
+        start: 100,
+        end: 700,
+        duration: 180
+      },
+      isRefreshable: false
+    }
   ]
 ];
