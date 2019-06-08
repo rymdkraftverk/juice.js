@@ -78,8 +78,7 @@ app.ticker.add(() => {
 
 Command | Description
 ------- | -----------
-`yarn build` | Generate files in the `dist` folder
-`yarn build:watch` | Continuously build files in the `dist` folder
+`yarn build` | Generate files in the `dist` folder. Supports `--watch` flag.
 `yarn clean` | Remove the `dist` folder
 `yarn release` | Start the process to release a new version
 
