@@ -1,6 +1,6 @@
 {
   "name": "juice.js",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "main": "./dist/index.js",
   "author": "Simon Lagos <simon.lagos.sallhed@gmail.com>",
   "license": "MIT",
