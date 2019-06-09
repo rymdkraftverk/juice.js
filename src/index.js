@@ -21,9 +21,15 @@ export const easeInOut = ({
 };
 
 export const easeOut = ({
-  end,
-  minSpeed = 0.5,
-}) => x => Math.max(Math.abs((end - x)) * 0.1, minSpeed);
+  startValue,
+  endValue,
+  duration,
+}) => {
+  const functionHeight = startValue - endValue;
+  const speedParameter = Math.log(1 / 100) / duration;
+
+  return t => endValue + functionHeight * Math.E ** (t * speedParameter);
+}
 
 export const linear = ({
   offset = 0,
