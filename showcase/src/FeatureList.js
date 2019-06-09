@@ -24,8 +24,9 @@ export default [
   [
     "easeOut", {
       parameters: {
-        end: { value: 800, optional: false },
-        minSpeed: { value: 0.5, optional: true },
+        startValue: { value: 100, optional: false },
+        duration: { value: 180, optional: false },
+        offset: { value: 0, optional: true },
       },
       isRefreshable: true,
     }
