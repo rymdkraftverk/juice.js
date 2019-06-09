@@ -15,6 +15,8 @@ import Size from "../constant/size";
 const Y_MARGIN = 45;
 const Y_OFFSET = 80;
 
+const DEBOUNCE_RATE = 500;
+
 const DOCS_URL = "https://rymdkraftverk.github.io/juice.js";
 const GITHUB_URL = "https://github.com/rymdkraftverk/juice.js";
 
@@ -88,7 +90,10 @@ const App = () => {
   const [features, setFeatures] = useState(FeatureList);
   const [updatedFeature, setUpdatedFeature] = useState(null);
   const [refreshFeature, setRefreshFeature] = useState(null);
-  const debouncedFeatures = useDebounce(features, 500);
+
+  // Both of these values need to be debounced. Will cause an unnecessary re-render, but that should be acceptable.
+  const [debouncedFeatures] = useDebounce(features, DEBOUNCE_RATE);
+  const [debouncedUpdatedFeature] = useDebounce(updatedFeature, DEBOUNCE_RATE);
 
   useEffect(() => {
     if (!app) {
@@ -107,17 +112,19 @@ const App = () => {
 
   useEffect(() => {
     _.forEach.convert({ cap: false })(([key, feature], index) => {
-      if (updatedFeature) {
-        if (key === updatedFeature) {
-          addFeature({
-            id: key,
-            getX: juice[key](_.mapValues("value", feature.parameters)),
-            y:
-              Y_OFFSET +
-              index * ((Y_MARGIN * Object.keys(feature.parameters).length) / 2)
-          });
-        }
-      } else {
+      addFeature({
+        id: key,
+        getX: juice[key](_.mapValues("value", feature.parameters)),
+        y:
+          Y_OFFSET +
+          index * ((Y_MARGIN * Object.keys(feature.parameters).length) / 2)
+      });
+    })(features);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  useEffect(() => {
+    _.forEach.convert({ cap: false })(([key, feature], index) => {
+      if (key === debouncedUpdatedFeature) {
         addFeature({
           id: key,
           getX: juice[key](_.mapValues("value", feature.parameters)),
@@ -126,8 +133,8 @@ const App = () => {
             index * ((Y_MARGIN * Object.keys(feature.parameters).length) / 2)
         });
       }
-    })(features);
-  }, [debouncedFeatures, features, updatedFeature]);
+    })(debouncedFeatures);
+  }, [debouncedUpdatedFeature, debouncedFeatures]);
 
   useEffect(() => {
     if (refreshFeature) {
