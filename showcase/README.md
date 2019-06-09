@@ -8,4 +8,8 @@ Rerun button?
 
 ## Develop
 
+`yarn` - Install dependencies 
+
+`yarn juice` - Install `juice.js`
+
 `yarn start` - Start the dev server. Default port `3000`.
