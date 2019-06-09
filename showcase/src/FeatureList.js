@@ -1,22 +1,12 @@
 export default [
   [
-    "sine",
-    {
-      parameters: {
-        start: 100,
-        end: 700,
-        duration: 180
-      },
-      isRefreshable: false
-    }
-  ],
-  [
     "easeInOut",
     {
       parameters: {
-        start: 100,
-        end: 600,
-        duration: 120
+        start: { value: 100, optional: false },
+        end: { value: 600, optional: false },
+        duration: { value: 120, optional: false },
+        startTime: { value: 0, optional: true }
       },
       isRefreshable: true
     }
@@ -25,10 +15,10 @@ export default [
     "parabola",
     {
       parameters: {
-        start: 100,
-        end: 700,
-        offset: 0,
-        modifier: 1
+        start: { value: 100, optional: false },
+        end: { value: 700, optional: false },
+        offset: { value: 0, optional: false },
+        modifier: { value: 1, optional: true }
       },
       isRefreshable: true
     }
@@ -37,31 +27,9 @@ export default [
     "sine",
     {
       parameters: {
-        start: 100,
-        end: 700,
-        duration: 180
-      },
-      isRefreshable: false
-    }
-  ],
-  [
-    "sine",
-    {
-      parameters: {
-        start: 100,
-        end: 700,
-        duration: 180
-      },
-      isRefreshable: false
-    }
-  ],
-  [
-    "sine",
-    {
-      parameters: {
-        start: 100,
-        end: 700,
-        duration: 180
+        start: { value: 100, optional: false },
+        end: { value: 700, optional: false },
+        duration: { value: 180, optional: false }
       },
       isRefreshable: false
     }

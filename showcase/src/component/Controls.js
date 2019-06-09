@@ -32,6 +32,18 @@ const Parameter = styled.div`
   padding-left: 32px;
 `;
 
+const ParameterName = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+const Optional = styled.div`
+  font-size: 10px;
+  font-style: italic;
+  margin-left: 8px;
+  color: gray;
+`;
+
 const Input = styled.input`
   width: 48px;
   font-size: 14px;
@@ -65,13 +77,17 @@ const Controls = ({
           )}
         </Emojify>
       </Header>
-      {_.map.convert({ cap: false })((value, key) => {
+      {_.map.convert({ cap: false })((control, key) => {
         return (
           <Parameter key={key}>
-            {key}
+            <ParameterName>
+              {key}{" "}
+              {control.optional ? <Optional>{` (optional)`}</Optional> : null}
+            </ParameterName>
+
             <Input
               type="number"
-              value={value}
+              value={control.value}
               onChange={event =>
                 onChange(name, key, parseInt(event.target.value))
               }

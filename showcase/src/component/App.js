@@ -41,7 +41,7 @@ const Logo = styled.div`
 `;
 
 const Header = styled.div`
-  height: 50px;
+  height: 60px;
   background-color: ${Color.LIGHTER_GRAY};
   display: flex;
   align-items: center;
@@ -70,7 +70,10 @@ const updateParameter = (features, setFeatures, setUpdatedFeature) => (
             ...feature,
             parameters: {
               ...feature.parameters,
-              [parameter]: value
+              [parameter]: {
+                ...feature.parameters[parameter],
+                value
+              }
             }
           }
         ];
@@ -108,7 +111,7 @@ const App = () => {
         if (key === updatedFeature) {
           addFeature({
             id: key,
-            getX: juice[key](feature.parameters),
+            getX: juice[key](_.mapValues("value", feature.parameters)),
             y:
               Y_OFFSET +
               index * ((Y_MARGIN * Object.keys(feature.parameters).length) / 2)
@@ -117,7 +120,7 @@ const App = () => {
       } else {
         addFeature({
           id: key,
-          getX: juice[key](feature.parameters),
+          getX: juice[key](_.mapValues("value", feature.parameters)),
           y:
             Y_OFFSET +
             index * ((Y_MARGIN * Object.keys(feature.parameters).length) / 2)

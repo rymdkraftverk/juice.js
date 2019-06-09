@@ -5,13 +5,13 @@ export default ({ id, getX, y }) => {
   // Destroy if it exists
   l1.destroy(id);
   l1.removeBehavior(id);
-  
-  const instance = PIXI.Sprite.from('asset/pig.png')
-  instance.x = 0
-  instance.y = y
+
+  const instance = PIXI.Sprite.from("asset/pig.png");
+  instance.x = 0;
+  instance.y = y;
   // instance.width = 32
   // instance.height = 32
-  
+
   // const instance = new PIXI.Graphics();
   // instance
   //   .clear()
