@@ -13,8 +13,8 @@ export default [
     "easeInOut",
     {
       parameters: {
-        start: { value: 100, optional: false },
-        end: { value: 600, optional: false },
+        startValue: { value: 100, optional: false },
+        endValue: { value: 600, optional: false },
         duration: { value: 120, optional: false },
         startTime: { value: 0, optional: true }
       },
@@ -35,10 +35,10 @@ export default [
     "linear",
     {
       parameters: {
-        offset: { value: 100, optional: true },
+        startValue: { value: 100, optional: true },
         speed: { value: 3, optional: true },
       },
-      isRefreshable: false
+      isRefreshable: true
     }
   ],
   [
@@ -47,7 +47,7 @@ export default [
       parameters: {
         duration: { value: 400, optional: false },
         height: { value: 500, optional: false },
-        offset: { value: 0, optional: true },
+        startValue: { value: 0, optional: true },
         startTime: { value: 0, optional: true }
       },
       isRefreshable: true
@@ -69,8 +69,8 @@ export default [
     "sine",
     {
       parameters: {
-        start: { value: 100, optional: false },
-        end: { value: 700, optional: false },
+        startValue: { value: 100, optional: false },
+        endValue: { value: 700, optional: false },
         duration: { value: 180, optional: false }
       },
       isRefreshable: false
