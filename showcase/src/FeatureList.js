@@ -2,9 +2,9 @@ export default [
   [
     "easeIn", {
       parameters: {
-        end: { value: 800, optional: false },
-        modifier: { value: 1, optional: true },
-        maxSpeed: { value: 10, optional: true },
+        startValue: { value: 100, optional: false },
+        endValue: { value: 800, optional: false },
+        duration: { value: 180, optional: false },
       }
     }
   ],
