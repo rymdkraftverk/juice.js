@@ -12,6 +12,16 @@ export default [
     }
   ],
   [
+    "linear",
+    {
+      parameters: {
+        start: { value: 100, optional: false },
+        speed: { value: 5, optional: true },
+      },
+      isRefreshable: false
+    }
+  ],
+  [
     "parabola",
     {
       parameters: {
