@@ -1,11 +1,5 @@
 const getNormalizer = (x1, x2) => 4 / ((2 * x1 * x2) - (x1 ** 2) - (x2 ** 2));
 
-export const easeIn = ({
-  end,
-  modifier = 1,
-  maxSpeed = 10,
-}) => x => Math.min(modifier / Math.abs((end - x)), maxSpeed);
-
 export const easeInOut = ({
   startValue, endValue, duration, startTime = 0,
 }) => {
@@ -19,6 +13,16 @@ export const easeInOut = ({
 
   return t => (speed * ((t - timeOffset) ** 3)) + positionOffset;
 };
+
+export const easeIn = ({
+  startValue,
+  endValue,
+  duration,
+}) => {
+  const speedParameter = Math.log(1 - startValue + endValue) / duration;
+
+  return t => (startValue - 1) + Math.E ** (t * speedParameter);
+}
 
 export const easeOut = ({
   startValue,
