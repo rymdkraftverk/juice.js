@@ -64,3 +64,19 @@ export const sine = ({
   const middle = ((startValue + endValue) / 2);
   return middle + ((middle - startValue) * Math.sin((t * Math.PI * 2) / duration));
 };
+
+// util functions
+
+const offsetTime = offset => f => t = f(t - offset)
+
+const invert = f => t => -1 * f(t)
+
+const limitLower = limit => f => t => Math.max(f(t), limit)
+
+const limitUpper = limit => f => t => Math.min(f(t), limit)
+
+const glueFunctions = limit => f => g => t =>
+  t < limit
+    ? f(t)
+    : g(t)
+
