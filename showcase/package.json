@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "juice.js": "file:../",
+    "juice.js": "file:..",
     "l1": "0.5.28",
     "lodash": "4.17.11",
     "pixi.js": "5.0.4",
@@ -15,7 +15,7 @@
     "use-debounce": "2.1.0"
   },
   "scripts": {
-    "juice": "yarn add file:../",
+    "juice": "npm link ../",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
