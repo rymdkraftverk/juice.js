@@ -12,10 +12,13 @@ import Emojify from "react-emojione";
 import Color from "../constant/color";
 import Size from "../constant/size";
 
-const Y_MARGIN = 45;
-const Y_OFFSET = 80;
+const Y_OFFSET = 0;
+const Y_MARGIN_CANVAS = 190;
+const Y_MARGIN_CANVAS_SMALL = 20;
 
 const DEBOUNCE_RATE = 500;
+
+const Y_MARGIN_CONTROL = 45;
 
 const DOCS_URL = "https://rymdkraftverk.github.io/juice.js";
 const GITHUB_URL = "https://github.com/rymdkraftverk/juice.js";
@@ -117,7 +120,7 @@ const App = () => {
         getX: juice[key](_.mapValues("value", feature.parameters)),
         y:
           Y_OFFSET +
-          index * ((Y_MARGIN * Object.keys(feature.parameters).length) / 2)
+          (index * Y_MARGIN_CANVAS) + (Y_MARGIN_CANVAS_SMALL * Object.keys(feature.parameters).length)
       });
     })(features);
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
@@ -130,7 +133,7 @@ const App = () => {
           getX: juice[key](_.mapValues("value", feature.parameters)),
           y:
             Y_OFFSET +
-            index * ((Y_MARGIN * Object.keys(feature.parameters).length) / 2)
+            (index * Y_MARGIN_CANVAS) + (Y_MARGIN_CANVAS_SMALL * Object.keys(feature.parameters).length)
         });
       }
     })(debouncedFeatures);
@@ -159,7 +162,7 @@ const App = () => {
           {_.map.convert({ cap: false })(([key, feature]) => {
             return (
               <Controls
-                height={40 + Y_MARGIN * Object.keys(feature.parameters).length}
+                height={40 + Y_MARGIN_CONTROL * Object.keys(feature.parameters).length}
                 key={key}
                 name={key}
                 controls={feature.parameters}
