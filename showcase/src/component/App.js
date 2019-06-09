@@ -167,7 +167,6 @@ const App = () => {
                 name={key}
                 controls={feature.parameters}
                 onRefreshClick={setRefreshFeature}
-                isRefreshable={feature.isRefreshable}
                 onChange={updateParameter(
                   features,
                   setFeatures,

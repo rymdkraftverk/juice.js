@@ -63,18 +63,15 @@ const Controls = ({
   onChange,
   height,
   onRefreshClick,
-  isRefreshable
 }) => {
   return (
     <Container height={height}>
       <Header>
         <Name>{name}</Name>
         <Emojify>
-          {isRefreshable && (
-            <RefreshButton
-              onClick={() => onRefreshClick(name)}
-            >{`:arrows_counterclockwise:`}</RefreshButton>
-          )}
+          <RefreshButton
+            onClick={() => onRefreshClick(name)}
+          >{`:arrows_counterclockwise:`}</RefreshButton>
         </Emojify>
       </Header>
       {_.map.convert({ cap: false })((control, key) => {
