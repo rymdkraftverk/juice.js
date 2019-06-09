@@ -1,5 +1,15 @@
 export default [
   [
+    "easeIn", {
+      parameters: {
+        end: { value: 800, optional: false },
+        modifier: { value: 1, optional: true },
+        maxSpeed: { value: 10, optional: true },
+      },
+      isRefreshable: true
+    }
+  ],
+  [
     "easeInOut",
     {
       parameters: {
@@ -9,6 +19,15 @@ export default [
         startTime: { value: 0, optional: true }
       },
       isRefreshable: true
+    }
+  ],
+  [
+    "easeOut", {
+      parameters: {
+        end: { value: 800, optional: false },
+        minSpeed: { value: 0.5, optional: true },
+      },
+      isRefreshable: true,
     }
   ],
   [
