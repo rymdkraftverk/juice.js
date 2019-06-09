@@ -31,10 +31,11 @@ export const linear = ({
 }) => t => start + (t * speed);
 
 export const parabola = ({
-  start, end, offset, modifier = 1,
+  duration, height, offset = 0, startTime = 0,
 }) => (t) => {
-  const normalizer = getNormalizer(start, end);
-  return offset + (modifier * normalizer * (t - start) * (t - end));
+  const endTime = startTime + duration;
+  const normalizer = getNormalizer(startTime, endTime);
+  return offset + (height * normalizer * (t - startTime) * (t - endTime));
 };
 
 export const parabolaAngle = ({

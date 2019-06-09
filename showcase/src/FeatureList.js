@@ -44,10 +44,10 @@ export default [
     "parabola",
     {
       parameters: {
-        start: { value: 100, optional: false },
-        end: { value: 700, optional: false },
-        offset: { value: 0, optional: false },
-        modifier: { value: 1, optional: true }
+        duration: { value: 400, optional: false },
+        height: { value: 500, optional: false },
+        offset: { value: 0, optional: true },
+        startTime: { value: 0, optional: true }
       },
       isRefreshable: true
     }
