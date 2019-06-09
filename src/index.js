@@ -21,7 +21,7 @@ export const easeIn = ({
 }) => {
   const speedParameter = Math.log(1 - startValue + endValue) / duration;
 
-  return t => (startValue - 1) + Math.E ** (t * speedParameter);
+  return t => (startValue - 1) + (Math.E ** (t * speedParameter));
 };
 
 export const easeOut = ({
