@@ -26,9 +26,9 @@ export const easeOut = ({
 }) => x => Math.max(Math.abs((end - x)) * 0.1, minSpeed);
 
 export const linear = ({
-  start,
+  offset = 0,
   speed = 1,
-}) => t => start + (t * speed);
+}) => t => offset + (t * speed);
 
 export const parabola = ({
   duration, height, offset = 0, startTime = 0,
