@@ -1,4 +1,4 @@
-const getNormalizer = (x1, x2) => (4 / ((x1 ** 2) + (x2 ** 2)));
+const getNormalizer = (x1, x2) => 4 / ((2 * x1 * x2) - (x1 ** 2) - (x2 ** 2));
 
 export const easeIn = ({
   end,
@@ -34,7 +34,7 @@ export const parabola = ({
   start, end, offset, modifier = 1,
 }) => (t) => {
   const normalizer = getNormalizer(start, end);
-  return -(offset + ((Math.abs(start - end) * modifier) * (normalizer * (t - start) * (t - end))));
+  return offset + (modifier * normalizer * (t - start) * (t - end));
 };
 
 export const parabolaAngle = ({
