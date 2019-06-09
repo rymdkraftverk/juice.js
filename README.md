@@ -22,8 +22,8 @@ All functions take a configuration object:
 
 ```js
 const getX = juice.sine({
-  start: 100,
-  end: 200,
+  startValue: 100,
+  endValue: 200,
   duration: 60
 })
 ```
@@ -33,8 +33,10 @@ They all return another function with the signature `(time) => value`.
 This can then be called in an update loop:
 
 ```js
-update((time) => {
+let time = 0
+update(() => {
   const x = getX(time)
+  time += 1
 })
 ```
 
@@ -59,18 +61,26 @@ const sprite = new PIXI.Sprite(texture);
 
 // Create a sine function
 const getX = juice.sine({
-  start: 100,
-  end: 200,
+  startValue: 100,
+  endValue: 200,
   duration: 30
 });
 
-// Call the function every tick
-let tick = 0;
+// Call the function every update
+let time = 0;
 app.ticker.add(() => {
   sprite.x = getX(tick);
-  tick += 1;
+  time += 1;
 });
 ```
+
+## Utils / Modifier functions
+
+TODO
+
+## Advanced
+
+The docs and examples use `time` as the input value. Though this will probably be the most common use case, any other value can be the input of the functions.
 
 ## Develop
 
@@ -84,13 +94,6 @@ Command | Description
 
 Use the `showcase` app to test any updates. If the public API is changed, also update the `src/FeatureList` file.
 
-## TODO
+### Todo
 
-easeIn
-easeOut
-parabolaAngle
-linear
-
-- [ ] Good documentation
-- Currying?
 - Good error messages

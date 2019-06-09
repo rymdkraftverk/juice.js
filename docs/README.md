@@ -1,32 +1,54 @@
 # juice.js API
 
-[sine](#sine)
-[parabola](#parabola)
-[easeInOut](#easeInOut)
+## Juicers
 
-## sine
-`({ start, end, duration }) => time => value`
+[easeIn](#easeIn)
+[easeInOut](#easeInOut)
+[easeOut](#easeOut)
+[linear](#linear)
+[parabola](#parabola)
+[sine](#sine)
+
+## Utils
+
+[glueFunctions](#glueFunctions)
+[limitLower](#limitLower)
+[limitUpper](#limitUpper)
+[offsetTime](#offsetTime)
+
+## linear
+`({ startValue, speed }) => time => value`
 
 ### parameters
 
-- `start`
-- `end`
+- `startValue`
+- `speed`
+
+The animation will start at `startValue` and move `speed` amount of values per update / tick.
+
+## sine
+`({ startValue, endValue, duration }) => time => value`
+
+### parameters
+
+- `startValue`
+- `endValue`
 - `duration`
 
-The return value will be a number between `start` and `end`. 
+The return value will be a number between `startValue` and `endValue`. 
 
-`duration` defines the amount of updates / ticks it will take to go from `start` to `end`
+`duration` defines the amount of updates / ticks it will take to go from `startValue` to `endValue`
 
 ## easeInOut
 
-`({ start, end, speed, ?startTime }) => time => value`
+`({ startValue, endValue, duration, ?startTime }) => time => value`
 
 ### parameters
 
-- `start`
-- `end`
+- `startValue`
+- `endValue`
 - `duration`
-- `startTime` (optional)
+- `startTime` _(optional)_
 
 The return value will be a number between `start` and `end`. The animation will continue to play if `end` is exceeded
 
@@ -36,4 +58,16 @@ The return value will be a number between `start` and `end`. The animation will 
 
 ## parabola
 
-`({ start, end, offset, modifier = 1 }) => time => value`
+`({ duration, height, ?startValue, ?startTime }) => time => value`
+
+### parameters
+
+- `height`
+- `duration` 
+- `startValue` _(optional)_
+- `startTime` _(optional)_
+
+The maximum point of the parabola will be `height` and `startValue` combined.
+
+`duration` defines the amount of updates / ticks it will take to go from `startValue` until `value` is equal to `startValue` again.
+
