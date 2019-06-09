@@ -25,8 +25,8 @@ export default [
     "easeOut", {
       parameters: {
         startValue: { value: 100, optional: false },
+        endValue: { value: 800, optional: false },
         duration: { value: 180, optional: false },
-        offset: { value: 0, optional: true },
       },
       isRefreshable: true,
     }
@@ -53,6 +53,18 @@ export default [
       isRefreshable: true
     }
   ],
+  // [
+  //   "parabolaAngle",
+  //   {
+  //     parameters: {
+  //       duration: { value: 400, optional: false },
+  //       height: { value: 500, optional: false },
+  //       offset: { value: 0, optional: true },
+  //       startTime: { value: 0, optional: true }
+  //     },
+  //     isRefreshable: true
+  //   }
+  // ],
   [
     "sine",
     {
