@@ -8,7 +8,7 @@
     "clean": "rm -rf dist",
     "build": "babel src --out-dir dist",
     "lint": "eslint src",
-    "release": "np"
+    "release": "yarn build && np"
   },
   "devDependencies": {
     "@babel/cli": "^7.4.4",
