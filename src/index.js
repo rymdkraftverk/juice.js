@@ -11,7 +11,7 @@ export const easeInOut = ({
   const positionOffset = (endValue + startValue) / 2;
   const timeOffset = (endTime + startTime) / 2;
 
-  return t => (speed * ((t - timeOffset) ** 3)) + positionOffset;
+  return (t) => (speed * ((t - timeOffset) ** 3)) + positionOffset;
 };
 
 export const easeIn = ({
@@ -21,7 +21,7 @@ export const easeIn = ({
 }) => {
   const speedParameter = Math.log(1 - startValue + endValue) / duration;
 
-  return t => (startValue - 1) + (Math.E ** (t * speedParameter));
+  return (t) => (startValue - 1) + (Math.E ** (t * speedParameter));
 };
 
 export const easeOut = ({
@@ -32,13 +32,13 @@ export const easeOut = ({
   const functionHeight = startValue - endValue;
   const speedParameter = Math.log(1 / 100) / duration;
 
-  return t => endValue + functionHeight * (Math.E ** (t * speedParameter));
+  return (t) => endValue + functionHeight * (Math.E ** (t * speedParameter));
 };
 
 export const linear = ({
   startValue = 0,
   speed = 1,
-}) => t => startValue + (t * speed);
+}) => (t) => startValue + (t * speed);
 
 export const parabola = ({
   duration, height, startValue = 0, startTime = 0,
@@ -67,12 +67,12 @@ export const sine = ({
 
 // util functions
 
-export const offsetTime = offset => f => t => f(t - offset);
+export const offsetTime = (offset) => (f) => (t) => f(t - offset);
 
-export const limitLower = limit => f => t => Math.max(f(t), limit);
+export const limitLower = (limit) => (f) => (t) => Math.max(f(t), limit);
 
-export const limitUpper = limit => f => t => Math.min(f(t), limit);
+export const limitUpper = (limit) => (f) => (t) => Math.min(f(t), limit);
 
-export const glueFunctions = limit => f => g => t => (t < limit
+export const glueFunctions = (limit) => (f) => (g) => (t) => (t < limit
   ? f(t)
   : g(t));
