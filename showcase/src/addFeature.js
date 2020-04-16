@@ -1,10 +1,11 @@
 import * as PIXI from "pixi.js";
 import * as l1 from "l1";
+import * as ex from "pixi-ex";
 
 export default ({ id, getX, y }) => {
   // Destroy if it exists
   l1.destroy(id);
-  l1.removeBehavior(id);
+  l1.remove(id);
 
   const instance = PIXI.Sprite.from("asset/pig.png");
   instance.x = 0;

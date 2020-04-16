@@ -1,4 +1,4 @@
-export default [
+const features = [
   [
     'easeIn',
     {
@@ -61,3 +61,5 @@ export default [
     },
   ],
 ]
+
+export default features

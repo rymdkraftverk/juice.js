@@ -1,6 +1,3 @@
-processors:
-  - stylelint-processor-styled-components
-syntax: scss
 extends:
   - stylelint-config-standard
   - stylelint-config-styled-components

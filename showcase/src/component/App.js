@@ -1,40 +1,42 @@
-import React, { useEffect, useState } from "react";
-import * as juice from "juice.js";
-import * as PIXI from "pixi.js";
-import * as l1 from "l1";
-import _ from "lodash/fp";
-import styled from "styled-components/macro";
-import { useDebounce } from "use-debounce";
-import addFeature from "../addFeature";
-import Controls from "./Controls";
-import FeatureList from "../FeatureList";
-import Emojify from "react-emojione";
-import Color from "../constant/color";
-import Size from "../constant/size";
+import React, { useEffect, useState } from 'react'
+import * as juice from 'juice.js'
+import _ from 'lodash/fp'
+import * as PIXI from 'pixi.js'
+import * as ex from 'pixi-ex'
+import * as l1 from 'l1'
+import styled from 'styled-components/macro'
+import { useDebounce } from 'use-debounce'
 
-const Y_OFFSET = 0;
-const Y_MARGIN_CANVAS = 190;
-const Y_MARGIN_CANVAS_SMALL = 20;
+import addFeature from '../addFeature'
+import Controls from './Controls'
+import FeatureList from '../FeatureList'
+import Emojify from 'react-emojione'
+import Color from '../constant/color'
+import Size from '../constant/size'
 
-const DEBOUNCE_RATE = 500;
+const Y_OFFSET = 0
+const Y_MARGIN_CANVAS = 190
+const Y_MARGIN_CANVAS_SMALL = 20
 
-const Y_MARGIN_CONTROL = 45;
+const DEBOUNCE_RATE = 500
 
-const DOCS_URL = "https://rymdkraftverk.github.io/juice.js";
-const GITHUB_URL = "https://github.com/rymdkraftverk/juice.js";
+const Y_MARGIN_CONTROL = 45
+
+const DOCS_URL = 'https://rymdkraftverk.github.io/juice.js'
+const GITHUB_URL = 'https://github.com/rymdkraftverk/juice.js'
 
 const Title = styled.div`
   font-weight: bold;
   font-size: 20px;
-`;
+`
 
-const Canvas = styled.div``;
+const Canvas = styled.div``
 
 const Container = styled.div`
   display: flex;
-`;
+`
 
-const ControlPanel = styled.div``;
+const ControlPanel = styled.div``
 
 const Logo = styled.div`
   display: flex;
@@ -43,7 +45,7 @@ const Logo = styled.div`
   width: ${Size.LEFT_COLUMN_WIDTH}px;
   background-color: ${Color.BLUE};
   height: 100%;
-`;
+`
 
 const Header = styled.div`
   height: 60px;
@@ -51,21 +53,21 @@ const Header = styled.div`
   display: flex;
   align-items: center;
   margin-bottom: 16px;
-`;
+`
 
 const Link = styled.a`
   margin-left: 64px;
   font-weight: bold;
   font-size: 16px;
   cursor: pointer;
-`;
+`
 
 const updateParameter = (features, setFeatures, setUpdatedFeature) => (
   featureName,
   parameter,
-  value
+  value,
 ) => {
-  setUpdatedFeature(featureName);
+  setUpdatedFeature(featureName)
   setFeatures(
     features.map(([key, feature]) => {
       if (key === featureName) {
@@ -77,74 +79,76 @@ const updateParameter = (features, setFeatures, setUpdatedFeature) => (
               ...feature.parameters,
               [parameter]: {
                 ...feature.parameters[parameter],
-                value
-              }
-            }
-          }
-        ];
+                value,
+              },
+            },
+          },
+        ]
       }
-      return [key, feature];
-    })
-  );
-};
+      return [key, feature]
+    }),
+  )
+}
 
 const App = () => {
-  const [app, setApp] = useState(null);
-  const [features, setFeatures] = useState(FeatureList);
-  const [updatedFeature, setUpdatedFeature] = useState(null);
-  const [refreshFeature, setRefreshFeature] = useState(null);
+  const [app, setApp] = useState(null)
+  const [features, setFeatures] = useState(FeatureList)
+  const [updatedFeature, setUpdatedFeature] = useState(null)
+  const [refreshFeature, setRefreshFeature] = useState(null)
 
   // Both of these values need to be debounced. Will cause an unnecessary re-render, but that should be acceptable.
-  const [debouncedFeatures] = useDebounce(features, DEBOUNCE_RATE);
-  const [debouncedUpdatedFeature] = useDebounce(updatedFeature, DEBOUNCE_RATE);
+  const [debouncedFeatures] = useDebounce(features, DEBOUNCE_RATE)
+  const [debouncedUpdatedFeature] = useDebounce(updatedFeature, DEBOUNCE_RATE)
 
   useEffect(() => {
     if (!app) {
       const _app = new PIXI.Application({
-        backgroundColor: l1.convertColorHex(Color.BLUE),
+        backgroundColor: ex.fromHex(Color.BLUE),
         width: 1000,
-        height: 1600
-      });
-      document.getElementById("canvas").appendChild(_app.view);
-      setApp(_app);
-      l1.init(_app);
+        height: 1600,
+      })
+      document.getElementById('canvas').appendChild(_app.view)
+      setApp(_app)
+      ex.init(_app)
     }
-  }, [app]);
+  }, [app])
 
-  console.log("rerender!");
+  console.log('rerender!')
 
   useEffect(() => {
     _.forEach.convert({ cap: false })(([key, feature], index) => {
       addFeature({
         id: key,
-        getX: juice[key](_.mapValues("value", feature.parameters)),
+        getX: juice[key](_.mapValues('value', feature.parameters)),
         y:
           Y_OFFSET +
-          (index * Y_MARGIN_CANVAS) + (Y_MARGIN_CANVAS_SMALL * Object.keys(feature.parameters).length)
-      });
-    })(features);
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+          index * Y_MARGIN_CANVAS +
+          Y_MARGIN_CANVAS_SMALL * Object.keys(feature.parameters).length,
+      })
+    })(features)
+  }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     _.forEach.convert({ cap: false })(([key, feature], index) => {
       if (key === debouncedUpdatedFeature) {
         addFeature({
           id: key,
-          getX: juice[key](_.mapValues("value", feature.parameters)),
+          getX: juice[key](_.mapValues('value', feature.parameters)),
           y:
             Y_OFFSET +
-            (index * Y_MARGIN_CANVAS) + (Y_MARGIN_CANVAS_SMALL * Object.keys(feature.parameters).length)
-        });
+            index * Y_MARGIN_CANVAS +
+            Y_MARGIN_CANVAS_SMALL * Object.keys(feature.parameters).length,
+        })
       }
-    })(debouncedFeatures);
-  }, [debouncedUpdatedFeature, debouncedFeatures]);
+    })(debouncedFeatures)
+  }, [debouncedUpdatedFeature, debouncedFeatures])
 
   useEffect(() => {
     if (refreshFeature) {
-      l1.resetBehavior(refreshFeature);
-      setRefreshFeature(null);
+      l1.reset(refreshFeature)
+      setRefreshFeature(null)
     }
-  }, [refreshFeature]);
+  }, [refreshFeature])
 
   return (
     <React.StrictMode>
@@ -162,7 +166,9 @@ const App = () => {
           {_.map.convert({ cap: false })(([key, feature]) => {
             return (
               <Controls
-                height={40 + Y_MARGIN_CONTROL * Object.keys(feature.parameters).length}
+                height={
+                  40 + Y_MARGIN_CONTROL * Object.keys(feature.parameters).length
+                }
                 key={key}
                 name={key}
                 controls={feature.parameters}
@@ -170,16 +176,16 @@ const App = () => {
                 onChange={updateParameter(
                   features,
                   setFeatures,
-                  setUpdatedFeature
+                  setUpdatedFeature,
                 )}
               />
-            );
+            )
           })(features)}
         </ControlPanel>
         <Canvas id="canvas" />
       </Container>
     </React.StrictMode>
-  );
-};
+  )
+}
 
-export default App;
+export default App
