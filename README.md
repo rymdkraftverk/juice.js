@@ -1,6 +1,21 @@
-# juice.js :tropical_drink:
+# :tropical_drink: juice.js
+
+Adds juice to your animations
+
+<div>
+  <img src="https://badgen.net/npm/v/juice.js?icon=npm" />
+  <!-- <img src="https://badgen.net/npm/dw/juice.js?icon=npm" /> -->
+</div>
+<div>
+  <img src="https://badgen.net/bundlephobia/minzip/juice.js" />
+</div>
+<div>
+  <img src="https://badgen.net/github/last-commit/rymdkraftverk/juice.js?icon=github" />
+</div>
 
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
+
+---
 
 For an introduction to the importance of juice, see the following [video](https://youtu.be/Fy0aCDmgnxg)
 
@@ -15,6 +30,8 @@ For an introduction to the importance of juice, see the following [video](https:
 - **Zero dependencies**
 
 [Full API docs](https://rymdkraftverk.github.io/juice.js/)
+
+---
 
 ## How to use
 
@@ -35,14 +52,14 @@ This can then be called in an update loop:
 ```js
 let time = 0
 update(() => {
-  const x = getX(time)
+  entity.x = getX(time)
   time += 1
 })
 ```
 
 The returned value can be used to animate any property of a visual element, such as the position, scale and opacity.
 
-All functions expect that `time` is an integer that starts at 0.
+`time` has to be an integer that starts at 0.
 
 ## Example code
 
@@ -56,7 +73,6 @@ import * as PIXI from "pixi.js";
 
 // Setup PIXI
 const app = new PIXI.Application();
-document.body.appendChild(app);
 const sprite = new PIXI.Sprite(texture);
 
 // Create a sine function
@@ -64,19 +80,38 @@ const getX = juice.sine({
   startValue: 100,
   endValue: 200,
   duration: 30
-});
+})
 
 // Call the function every update
 let time = 0;
 app.ticker.add(() => {
-  sprite.x = getX(tick);
-  time += 1;
+  sprite.x = getX(time)
+  time += 1
 });
 ```
+
+Using [level1](https://github.com/rymdkraftverk/level1) behaviors, it can be shortened to:
+
+```js
+import * as l1 from 'l1'
+
+l1.repeat((counter) => {
+  sprite.x = getX(counter);
+})
+```
+
+---
+
+## Available functions
+
+
+---
 
 ## Utils / Modifier functions
 
 TODO
+
+---
 
 ## Advanced
 
@@ -93,7 +128,3 @@ Command | Description
 `yarn release` | Start the process to release a new version
 
 Use the `showcase` app to test any updates. If the public API is changed, also update the `src/FeatureList` file.
-
-### Todo
-
-- Good error messages
