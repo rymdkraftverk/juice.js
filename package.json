@@ -8,7 +8,8 @@
     "clean": "rm -rf dist",
     "build": "babel src --out-dir dist",
     "lint": "eslint src",
-    "release": "yarn build && np"
+    "release": "yarn build && np",
+    "test": "ava"
   },
   "prettier": {
     "trailingComma": "all",
@@ -17,14 +18,23 @@
     "useTabs": false,
     "bracketSpacing": true
   },
+  "xo": {
+    "prettier": true
+  },
+  "ava": {
+    "require": [
+      "@babel/register"
+    ]
+  },
   "devDependencies": {
     "@babel/cli": "7.8.4",
     "@babel/core": "7.9.0",
     "@babel/preset-env": "7.9.5",
-    "eslint": "6.8.0",
-    "eslint-config-airbnb-base": "14.1.0",
-    "eslint-plugin-import": "2.20.2",
-    "np": "6.2.1"
-  },
-  "dependencies": {}
+    "@babel/register": "7.9.0",
+    "ava": "3.7.0",
+    "lodash": "4.17.15",
+    "np": "6.2.1",
+    "typescript": "3.8.3",
+    "xo": "0.29.1"
+  }
 }
