@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react'
-// import * as juice from 'juice.js'
+import * as juice from 'juice.js'
 import _ from 'lodash/fp'
 import * as PIXI from 'pixi.js'
 import styled from 'styled-components'
 import Size from './constant/size'
 import Color from './constant/color'
 import features from './constant/features'
+import Drop from './react-drop/Drop'
 
 const Title = styled.div`
   font-weight: bold;
@@ -53,8 +54,11 @@ const Main = styled.div`
   display: flex;
 `
 
+let time = 0
+
 function App() {
-  // const [x, setX] = useState([])
+  const [x, setX] = useState(0)
+  const [juicers, setJuicers] = useState([])
 
   useEffect(() => {
     const app = new PIXI.Application({
@@ -67,6 +71,12 @@ function App() {
     app.stage.addChild(sprite)
     app.ticker.add(() => {
       // sprite.x += 1
+      juicers.forEach((juicer) => {
+        console.log('hello')
+        sprite.x = juicer.getValue(time)
+      })
+
+      time += 1
     })
   }, [])
   return (
@@ -75,12 +85,23 @@ function App() {
         <Logo>
           <Title>juice.js</Title>
         </Logo>
-        <Link href={DOCS_URL}>DOCS</Link>
+        <Link href={DOCS_URL}>DOCSsss</Link>
         <Link href={GITHUB_URL}>GITHUB</Link>
       </Header>
       <Main>
         <ControlPanel>
-          {features.map(([key, feature]) => {
+          <Drop
+            onClick={(value) => {
+              const getValue = juice[value]
+              setJuicers(juicers.concat[{ getValue }])
+            }}
+            header={'select feature'}
+            options={features.map(([parameterName]) => ({
+              label: parameterName,
+              value: parameterName,
+            }))}
+          />
+          {/* {features.map(([key, feature]) => {
             console.log('App -> feature', feature)
             return (
               <React.Fragment key={key}>
@@ -94,7 +115,7 @@ function App() {
                 </div>
               </React.Fragment>
             )
-          })}
+          })} */}
         </ControlPanel>
         <Canvas id="canvas"></Canvas>
       </Main>

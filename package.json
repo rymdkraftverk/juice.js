@@ -5,10 +5,10 @@
   "author": "Simon Lagos <simon.lagos.sallhed@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "clean": "rm -rf dist",
-    "build": "babel src --out-dir dist",
-    "lint": "eslint src",
-    "release": "yarn build && np",
+    "clean": "rm -f pixi-ex.tgz",
+    "build": "yarn clean && rollup --config rollup.config.js",
+    "go": "yarn build && yarn pack --filename juice.js.tgz && cd showcase2 && yarn refresh && yarn start",
+    "release": "yarn build && yarn audit && np",
     "test": "ava"
   },
   "prettier": {
@@ -19,7 +19,20 @@
     "bracketSpacing": true
   },
   "xo": {
-    "prettier": true
+    "prettier": true,
+    "env": [
+      "es2020",
+      "node"
+    ],
+    "ignores": [
+      "showcase2"
+    ],
+    "parser": "@typescript-eslint/parser",
+    "rules": {
+      "unicorn/filename-case": "off",
+      "capitalized-comments": "off",
+      "dot-notation": "off"
+    }
   },
   "ava": {
     "require": [
@@ -31,9 +44,11 @@
     "@babel/core": "7.9.0",
     "@babel/preset-env": "7.9.5",
     "@babel/register": "7.9.0",
+    "@rollup/plugin-typescript": "4.1.1",
     "ava": "3.7.0",
     "lodash": "4.17.15",
     "np": "6.2.1",
+    "rollup": "2.9.1",
     "typescript": "3.8.3",
     "xo": "0.29.1"
   }

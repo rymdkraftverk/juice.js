@@ -95,12 +95,20 @@ test('easeIn - negative endValue', (t) => {
 test('parabola', (t) => {
   const getX = juice.parabola({
     height: 20,
-    duration,
+    duration: duration + 1,
   })
-  const expectedValues = [0, 12.8, 19.200000000000003, 19.200000000000003, 12.8]
+  const expectedValues = [
+    0,
+    12.8,
+    19.200000000000003,
+    19.200000000000003,
+    12.8,
+    0,
+  ]
   times((index) => {
     t.is(getX(index), expectedValues[index])
-  }, duration)
+    // TODO: should there really be +1 here?
+  }, duration + 1)
 })
 
 test('easeInOut - positive endValue', (t) => {
