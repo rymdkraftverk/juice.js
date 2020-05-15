@@ -41,11 +41,11 @@ All functions take a configuration object:
 const getX = juice.sine({
   startValue: 100,
   endValue: 200,
-  duration: 60
+  duration: 60,
 })
 ```
 
-They all return another function with the signature `(time) => value`. 
+They all return another function with the signature `(time) => value`.
 
 This can then be called in an update loop:
 
@@ -68,26 +68,26 @@ Example uses `pixi.js` but `juice.js` can be used with any application or game t
 ### Example usage with pixi.js
 
 ```js
-import * as juice from "juice.js";
-import * as PIXI from "pixi.js";
+import * as juice from 'juice.js'
+import * as PIXI from 'pixi.js'
 
 // Setup PIXI
-const app = new PIXI.Application();
-const sprite = new PIXI.Sprite(texture);
+const app = new PIXI.Application()
+const sprite = new PIXI.Sprite(texture)
 
 // Create a sine function
 const getX = juice.sine({
   startValue: 100,
   endValue: 200,
-  duration: 30
+  duration: 30,
 })
 
 // Call the function every update
-let time = 0;
+let time = 0
 app.ticker.add(() => {
   sprite.x = getX(time)
   time += 1
-});
+})
 ```
 
 Using [level1](https://github.com/rymdkraftverk/level1) behaviors, it can be shortened to:
@@ -96,14 +96,13 @@ Using [level1](https://github.com/rymdkraftverk/level1) behaviors, it can be sho
 import * as l1 from 'l1'
 
 l1.repeat((counter) => {
-  sprite.x = getX(counter);
+  sprite.x = getX(counter)
 })
 ```
 
 ---
 
 ## Available functions
-
 
 ---
 
@@ -113,18 +112,20 @@ TODO
 
 ---
 
-## Advanced
+## Tips
 
-The docs and examples use `time` as the input value. Though this will probably be the most common use case, any other value can be the input of the functions.
+- The docs and examples use `time` as the input value. Though this will probably be the most common use case, any other value can be the input of the functions.
+
+- Juice works best when it doesn't interrupt what the player is trying to do! For example, the player should never have to wait for the animation to finish before they can take the next action.
 
 ## Develop
 
 ### Custom commands
 
-Command | Description
-------- | -----------
-`yarn build` | Generate files in the `dist` folder. Supports `--watch` flag.
-`yarn clean` | Remove the `dist` folder
-`yarn release` | Start the process to release a new version
+| Command        | Description                                                   |
+| -------------- | ------------------------------------------------------------- |
+| `yarn build`   | Generate files in the `dist` folder. Supports `--watch` flag. |
+| `yarn clean`   | Remove the `dist` folder                                      |
+| `yarn release` | Start the process to release a new version                    |
 
 Use the `showcase` app to test any updates. If the public API is changed, also update the `src/FeatureList` file.
