@@ -1,6 +1,22 @@
 const features = [
   {
+    name: 'sine',
+    parameters: {
+      duration: { value: 300, optional: false },
+      startValue: { value: 100, optional: false },
+      endValue: { value: 700, optional: false },
+    },
+  },
+  {
     name: 'easeIn',
+    parameters: {
+      duration: { value: 180, optional: false },
+      startValue: { value: 100, optional: false },
+      endValue: { value: 800, optional: false },
+    },
+  },
+  {
+    name: 'easeOut',
     parameters: {
       duration: { value: 180, optional: false },
       startValue: { value: 100, optional: false },
@@ -14,14 +30,6 @@ const features = [
       startValue: { value: 100, optional: false },
       endValue: { value: 600, optional: false },
       startTime: { value: 0, optional: true },
-    },
-  },
-  {
-    name: 'easeOut',
-    parameters: {
-      duration: { value: 180, optional: false },
-      startValue: { value: 100, optional: false },
-      endValue: { value: 800, optional: false },
     },
   },
   {
@@ -39,14 +47,6 @@ const features = [
       height: { value: 500, optional: false },
       startValue: { value: 0, optional: true },
       startTime: { value: 0, optional: true },
-    },
-  },
-  {
-    name: 'sine',
-    parameters: {
-      duration: { value: 180, optional: false },
-      startValue: { value: 100, optional: false },
-      endValue: { value: 700, optional: false },
     },
   },
 ]

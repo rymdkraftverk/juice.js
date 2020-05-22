@@ -20,6 +20,7 @@ const Canvas = styled.div``
 const Container = styled.div``
 
 const ControlPanel = styled.div`
+  margin-top: 50px;
   width: ${Size.LEFT_COLUMN_WIDTH}px;
 `
 
@@ -52,6 +53,16 @@ const Main = styled.div`
   display: flex;
 `
 
+const Refresh = styled.div`
+  border: 1px solid white;
+  border-radius: 4px;
+  padding: 5px 0 10px;
+  width: 140px;
+  text-align: center;
+  margin-bottom: 10px;
+  cursor: pointer;
+`
+
 const ParameterTitle = styled.div`
   border: 1px solid blanchedalmond;
   border-radius: 2px;
@@ -63,20 +74,18 @@ const ParameterTitle = styled.div`
 const Options = styled.div``
 
 const Option = styled.div`
-  padding: 5px;
+  padding: 5px 20px;
   cursor: pointer;
   user-select: none;
+  font-size: 20px;
   background-color: ${({ selected }) =>
     selected ? Color.BLUE : 'transparent'};
+
   /* TODO: Hover effect */
   /* TODO: Click effect */
 `
 
 let time = 0
-
-// TODO (parameters):
-// x, y, scale
-// Pig start in the middle?
 
 const START_X = 0
 
@@ -87,30 +96,34 @@ const reset = () => {
   time = 0
 }
 
+// TODO: Display code for easy copy
+
 function App() {
-  const [juicers, setJuicers] = useState([])
-  const [selectedFeature, setSelectedFeature] = useState(null)
+  const [juicer, setJuicer] = useState(null)
+  // TODO: Start with sine
+  const [selectedFeature, setSelectedFeature] = useState('sine')
   const [configuration, setConfiguration] = useState({})
   const updateFn = useRef()
 
   useEffect(() => {
     updateFn.current = () => {
-      juicers.forEach((juicer) => {
+      if (juicer) {
         sprite.x = juicer.getValue(time)
-      })
 
-      time += 1
+        time += 1
+      }
     }
-  }, [juicers])
+  }, [juicer])
 
   useEffect(() => {
     const app = new PIXI.Application({
       backgroundColor: 0xcccccc,
       width: 800,
-      height: 600,
+      height: 300,
     })
     document.getElementById('canvas').appendChild(app.view)
     sprite = PIXI.Sprite.from('asset/pig.png')
+    sprite.position.set(50, 50)
     app.stage.addChild(sprite)
 
     app.ticker.add(() => {
@@ -118,38 +131,35 @@ function App() {
     })
   }, [])
 
+  useEffect(() => {
+    const feature = features.find((feature) => feature.name === selectedFeature)
+    const getValue = juice[selectedFeature](
+      _.mapValues('value')(feature.parameters),
+    )
+    reset()
+    setJuicer({ getValue })
+  }, [selectedFeature])
+
+  console.log('rerender')
+
   return (
     <Container>
       <Header>
         <Logo>
           <Title>🍹 juice.js</Title>
         </Logo>
+        {/* TODO: Make padding clickable. Hover effect? Open in new tab. */}
         <Link href={DOCS_URL}>DOCS</Link>
         <Link href={GITHUB_URL}>GITHUB</Link>
       </Header>
       <Main>
         <ControlPanel>
-          <div
-            onClick={() => {
-              reset()
-            }}
-          >
-            Refresh
-          </div>
           <ParameterTitle>Select feature</ParameterTitle>
           <Options>
             {features.map(({ name }) => {
               return (
                 <Option
                   onClick={() => {
-                    const feature = features.find(
-                      (feature) => feature.name === name,
-                    )
-                    const getValue = juice[name](
-                      _.mapValues('value')(feature.parameters),
-                    )
-                    reset()
-                    setJuicers([{ getValue }])
                     setSelectedFeature(name)
                   }}
                   key={name}
@@ -160,7 +170,7 @@ function App() {
               )
             })}
           </Options>
-          {juicers.length > 0 ? (
+          {juicer ? (
             <>
               {_.map.convert({ cap: false })(({ value, optional }, key) => {
                 return (
@@ -189,7 +199,7 @@ function App() {
 
                         const getValue = juice[selectedFeature](configuration)
                         reset()
-                        setJuicers([{ getValue }])
+                        setJuicer({ getValue })
                       }}
                     />
                   </React.Fragment>
@@ -201,7 +211,16 @@ function App() {
             </>
           ) : null}
         </ControlPanel>
-        <Canvas id="canvas"></Canvas>
+        <div>
+          <Refresh
+            onClick={() => {
+              reset()
+            }}
+          >
+            Refresh
+          </Refresh>
+          <Canvas id="canvas"></Canvas>
+        </div>
       </Main>
     </Container>
   )
