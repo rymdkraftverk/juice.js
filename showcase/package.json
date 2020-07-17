@@ -5,7 +5,7 @@
   "dependencies": {
     "juice.js": "file:..",
     "l1": "0.5.28",
-    "lodash": "4.17.15",
+    "lodash": "4.17.19",
     "pixi.js": "5.0.4",
     "react": "16.8.6",
     "react-dom": "16.8.6",
