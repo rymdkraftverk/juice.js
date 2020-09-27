@@ -1,9 +1,8 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import { createGlobalStyle } from "styled-components/macro";
-import App from "./component/App";
-import * as serviceWorker from "./serviceWorker";
-import Color from "./constant/color";
+import React from 'react'
+import ReactDOM from 'react-dom'
+import { createGlobalStyle } from 'styled-components/macro'
+import App from './App'
+import Color from './constant/color'
 
 const GlobalStyles = createGlobalStyle`
   body {
@@ -32,17 +31,12 @@ const GlobalStyles = createGlobalStyle`
     color: inherit;
     text-decoration: none;
   }
-`;
+`
 
 ReactDOM.render(
-  <div>
+  <React.StrictMode>
     <GlobalStyles />
     <App />
-  </div>,
-  document.getElementById("root")
-);
-
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: http://bit.ly/CRA-PWA
-serviceWorker.register();
+  </React.StrictMode>,
+  document.getElementById('root'),
+)

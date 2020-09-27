@@ -5,19 +5,57 @@
   "author": "Simon Lagos <simon.lagos.sallhed@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "clean": "rm -rf dist",
-    "build": "babel src --out-dir dist",
-    "lint": "eslint src",
-    "release": "yarn build && np"
+    "clean": "rm -f pixi-ex.tgz",
+    "build": "yarn clean && rollup --config rollup.config.js",
+    "go": "yarn build && yarn pack --filename juice.js.tgz && cd showcase2 && yarn refresh && yarn start",
+    "release": "yarn build && yarn audit && np",
+    "test": "ava"
+  },
+  "prettier": {
+    "trailingComma": "all",
+    "semi": false,
+    "singleQuote": true,
+    "useTabs": false,
+    "bracketSpacing": true
+  },
+  "xo": {
+    "prettier": true,
+    "env": [
+      "es2020",
+      "node"
+    ],
+    "ignores": [
+      "showcase2"
+    ],
+    "parser": "@typescript-eslint/parser",
+    "rules": {
+      "unicorn/filename-case": "off",
+      "capitalized-comments": "off",
+      "dot-notation": "off"
+    }
+  },
+  "ava": {
+    "require": [
+      "./script/setupTests.js"
+    ],
+    "extensions": [
+      "js",
+      "ts"
+    ]
   },
   "devDependencies": {
-    "@babel/cli": "7.8.4",
-    "@babel/core": "7.9.0",
-    "@babel/preset-env": "7.9.5",
-    "eslint": "6.8.0",
-    "eslint-config-airbnb-base": "14.1.0",
-    "eslint-plugin-import": "2.20.2",
-    "np": "6.2.1"
-  },
-  "dependencies": {}
+    "@babel/cli": "7.11.6",
+    "@babel/core": "7.11.6",
+    "@babel/preset-env": "7.11.5",
+    "@babel/preset-typescript": "7.10.4",
+    "@babel/register": "7.11.5",
+    "@rollup/plugin-typescript": "5.0.1",
+    "@types/lodash": "4.14.161",
+    "ava": "3.12.1",
+    "lodash": "4.17.20",
+    "np": "6.2.5",
+    "rollup": "2.18.1",
+    "typescript": "3.9.5",
+    "xo": "0.32.0"
+  }
 }

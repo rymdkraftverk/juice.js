@@ -16,18 +16,22 @@
 [limitUpper](#limitUpper)
 [offsetTime](#offsetTime)
 
+---
+
 ## linear
-`({ startValue, speed }) => time => value`
+`linear({ startValue, speed }) => time => value`
 
 ### parameters
 
 - `startValue`
 - `speed`
 
-The animation will start at `startValue` and move `speed` amount of values per update / tick.
+The animation will start at `startValue` and move `speed` amount of values per update.
+
+---
 
 ## sine
-`({ startValue, endValue, duration }) => time => value`
+`sine({ startValue, endValue, duration }) => time => value`
 
 ### parameters
 
@@ -37,11 +41,13 @@ The animation will start at `startValue` and move `speed` amount of values per u
 
 The return value will be a number between `startValue` and `endValue`. 
 
-`duration` defines the amount of updates / ticks it will take to go from `startValue` to `endValue`
+`duration` defines the amount of updates it will take to go from `startValue` to `endValue`
+
+---
 
 ## easeInOut
 
-`({ startValue, endValue, duration, ?startTime }) => time => value`
+`easeInOut({ startValue, endValue, duration, ?startTime }) => time => value`
 
 ### parameters
 
@@ -50,15 +56,17 @@ The return value will be a number between `startValue` and `endValue`.
 - `duration`
 - `startTime` _(optional)_
 
-The return value will be a number between `start` and `end`. The animation will continue to play if `end` is exceeded
+The return value will be a number between `startValue` and `endValue`. The animation will continue to play when `endValue` is exceeded.
 
-`duration` defines the amount of updates / ticks it will take to go from `start` to `end`
+`duration` defines the amount of updates it will take to go from `startValue` to `endValue`
 
 `startTime` is an optional time offset if your counter does not start at 0
 
+---
+
 ## parabola
 
-`({ duration, height, ?startValue, ?startTime }) => time => value`
+`parabola({ duration, height, ?startValue, ?startTime }) => time => value`
 
 ### parameters
 
