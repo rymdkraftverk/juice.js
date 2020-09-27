@@ -3,6 +3,7 @@ import * as juice from 'juice.js'
 import _ from 'lodash/fp'
 import * as PIXI from 'pixi.js'
 import styled from 'styled-components'
+
 import Size from './constant/size'
 import Color from './constant/color'
 import features from './constant/features'
@@ -24,11 +25,18 @@ const ControlPanel = styled.div`
   width: ${Size.LEFT_COLUMN_WIDTH}px;
 `
 
-const Link = styled.a`
+const Link = styled.a.attrs(() => ({
+  target: '_blank',
+}))`
   margin-left: 64px;
   font-weight: bold;
   font-size: 16px;
   cursor: pointer;
+`
+
+const TopPanel = styled.div`
+  display: flex;
+  align-items: center;
 `
 
 const Logo = styled.div`
@@ -56,17 +64,16 @@ const Main = styled.div`
 const Refresh = styled.div`
   border: 1px solid white;
   border-radius: 4px;
-  padding: 5px 0 10px;
   width: 140px;
   text-align: center;
   margin-bottom: 10px;
+  margin-right: 20px;
   cursor: pointer;
 `
 
 const ParameterTitle = styled.div`
   border: 1px solid blanchedalmond;
   border-radius: 2px;
-  padding: 5px;
   cursor: pointer;
   user-select: none;
 `
@@ -74,20 +81,17 @@ const ParameterTitle = styled.div`
 const Options = styled.div``
 
 const Option = styled.div`
-  padding: 5px 20px;
   cursor: pointer;
   user-select: none;
   font-size: 20px;
   background-color: ${({ selected }) =>
     selected ? Color.BLUE : 'transparent'};
-
-  /* TODO: Hover effect */
-  /* TODO: Click effect */
 `
 
 let time = 0
 
-const START_X = 0
+// * Render outside until it's animated
+const START_X = -999
 
 let sprite
 
@@ -95,31 +99,33 @@ const reset = () => {
   sprite.x = START_X
   time = 0
 }
-
-// TODO: Display code for easy copy
-
 function App() {
   const [juicer, setJuicer] = useState(null)
-  // TODO: Start with sine
+  const [x, setX] = useState(0)
   const [selectedFeature, setSelectedFeature] = useState('sine')
-  const [configuration, setConfiguration] = useState({})
   const updateFn = useRef()
 
   useEffect(() => {
+    // @ts-ignore
     updateFn.current = () => {
-      if (juicer) {
-        sprite.x = juicer.getValue(time)
-
+      if (juicer && (juicer.loop || juicer.duration >= time)) {
+        setX(juicer?.getValue(time))
         time += 1
       }
     }
   }, [juicer])
 
   useEffect(() => {
+    if (sprite) {
+      sprite.x = x
+    }
+  }, [x])
+
+  useEffect(() => {
     const app = new PIXI.Application({
-      backgroundColor: 0xcccccc,
+      backgroundColor: 0x0b4d6c,
       width: 800,
-      height: 300,
+      height: 200,
     })
     document.getElementById('canvas').appendChild(app.view)
     sprite = PIXI.Sprite.from('asset/pig.png')
@@ -137,10 +143,12 @@ function App() {
       _.mapValues('value')(feature.parameters),
     )
     reset()
-    setJuicer({ getValue })
+    setJuicer({
+      getValue,
+      duration: feature.parameters.duration.value,
+      loop: feature.loop,
+    })
   }, [selectedFeature])
-
-  console.log('rerender')
 
   return (
     <Container>
@@ -148,7 +156,6 @@ function App() {
         <Logo>
           <Title>🍹 juice.js</Title>
         </Logo>
-        {/* TODO: Make padding clickable. Hover effect? Open in new tab. */}
         <Link href={DOCS_URL}>DOCS</Link>
         <Link href={GITHUB_URL}>GITHUB</Link>
       </Header>
@@ -170,55 +177,18 @@ function App() {
               )
             })}
           </Options>
-          {juicer ? (
-            <>
-              {_.map.convert({ cap: false })(({ value, optional }, key) => {
-                return (
-                  <React.Fragment key={key}>
-                    <p>
-                      {key} {optional ? '(optional)' : ''}
-                    </p>
-                    <input
-                      placeholder={value}
-                      onChange={({ target: { value: newValue } }) => {
-                        const feature = features.find(
-                          (feature) => feature.name === selectedFeature,
-                        )
-
-                        const configuration = _.mapValues.convert({
-                          cap: false,
-                        })((parameterValue, parameterKey) => {
-                          if (parameterKey === key) {
-                            if (!newValue) {
-                              return value
-                            }
-                            return newValue
-                          }
-                          return parameterValue.value
-                        })(feature.parameters)
-
-                        const getValue = juice[selectedFeature](configuration)
-                        reset()
-                        setJuicer({ getValue })
-                      }}
-                    />
-                  </React.Fragment>
-                )
-              })(
-                features.find((feature) => feature.name === selectedFeature)
-                  .parameters,
-              )}
-            </>
-          ) : null}
         </ControlPanel>
         <div>
-          <Refresh
-            onClick={() => {
-              reset()
-            }}
-          >
-            Refresh
-          </Refresh>
+          <TopPanel>
+            <Refresh
+              onClick={() => {
+                reset()
+              }}
+            >
+              Refresh
+            </Refresh>
+            <div>x (rounded): {Math.round(x)}</div>
+          </TopPanel>
           <Canvas id="canvas"></Canvas>
         </div>
       </Main>

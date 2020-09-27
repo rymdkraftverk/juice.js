@@ -13,5 +13,5 @@
     "rootDir": "./src"
   },
   "include": ["src"],
-  "exclude": ["node_modules", "showcase2"]
+  "exclude": ["node_modules", "testApp"]
 }
