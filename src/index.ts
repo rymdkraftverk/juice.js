@@ -99,20 +99,12 @@ export const parabola = ({
   return startValue + height * normalizer * (t - startTime) * (t - endTime)
 }
 
-// Export const parabolaAngle = ({ start, end, modifier = 1 }) => (x) => {
-//   const normalizer = getNormalizer(start, end)
-//   return Math.atan(
-//     Math.abs(start - end) * modifier * normalizer * (2 * x - start - end),
-//   )
-// }
-
 type SineOptions = {
   readonly endValue: number
   readonly duration: number
   readonly startValue?: number
 }
 
-// TODO: where to start in the animation: phase shift
 export const sine = ({
   endValue,
   duration,
@@ -121,14 +113,3 @@ export const sine = ({
   const middle = (startValue + endValue) / 2
   return middle + (middle - startValue) * Math.sin((t * Math.PI * 2) / duration)
 }
-
-// * Util functions
-// TODO: Evaluate
-// export const offsetTime = (offset) => (f) => (t) => f(t - offset)
-
-// export const limitLower = (limit) => (f) => (t) => Math.max(f(t), limit)
-
-// export const limitUpper = (limit) => (f) => (t) => Math.min(f(t), limit)
-
-// export const glueFunctions = (limit) => (f) => (g) => (t) =>
-//   t < limit ? f(t) : g(t)
