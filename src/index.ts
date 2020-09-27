@@ -16,10 +16,6 @@ export const easeInOut = ({
   startValue = 0,
   startTime = 0,
 }: EaseInOutOptions): juiceFn => {
-  if (duration <= 0) {
-    console.error('easeInOut: duration has to be positive')
-  }
-
   const endTime = startTime + duration
   const speed = 4 * ((startValue - endValue) / (startTime - endTime) ** 3)
   const positionOffset = (endValue + startValue) / 2
