@@ -38,7 +38,7 @@ test('easeOut - positive endValue', (t) => {
   ]
   times((index) => {
     t.is(getX(index), expectedValues[index])
-  }, duration)
+  }, expectedValues.length)
 })
 
 test('easeOut - negative endValue', (t) => {
@@ -55,7 +55,7 @@ test('easeOut - negative endValue', (t) => {
   ]
   times((index) => {
     t.is(getX(index), expectedValues[index])
-  }, duration)
+  }, expectedValues.length)
 })
 
 test('easeIn - positive endValue', (t) => {
@@ -72,7 +72,7 @@ test('easeIn - positive endValue', (t) => {
   ]
   times((index) => {
     t.is(getX(index), expectedValues[index])
-  }, duration)
+  }, expectedValues.length)
 })
 
 test('easeIn - negative endValue', (t) => {
@@ -89,7 +89,7 @@ test('easeIn - negative endValue', (t) => {
   ]
   times((index) => {
     t.is(getX(index), expectedValues[index])
-  }, duration)
+  }, expectedValues.length)
 })
 
 test('parabola', (t) => {
@@ -99,16 +99,16 @@ test('parabola', (t) => {
   })
   const expectedValues = [
     0,
-    12.8,
-    19.200000000000003,
-    19.200000000000003,
-    12.8,
+    11.11111111111111,
+    17.77777777777778,
+    20,
+    17.77777777777778,
+    11.11111111111111,
     0,
   ]
   times((index) => {
     t.is(getX(index), expectedValues[index])
-    // TODO: should there really be +1 here?
-  }, duration + 1)
+  }, expectedValues.length)
 })
 
 test('easeInOut - positive endValue', (t) => {
@@ -119,7 +119,7 @@ test('easeInOut - positive endValue', (t) => {
   const expectedValues = [0, 15.68, 19.84, 20.16, 24.32]
   times((index) => {
     t.is(getX(index), expectedValues[index])
-  }, duration)
+  }, expectedValues.length)
 })
 
 test('easeInOut - negative endValue', (t) => {
@@ -130,7 +130,7 @@ test('easeInOut - negative endValue', (t) => {
   const expectedValues = [0, -15.68, -19.84, -20.16, -24.32]
   times((index) => {
     t.is(getX(index), expectedValues[index])
-  }, duration)
+  }, expectedValues.length)
 })
 
 test('sine - negative endValue', (t) => {
@@ -147,7 +147,7 @@ test('sine - negative endValue', (t) => {
   ]
   times((index) => {
     t.is(getX(index), expectedValues[index])
-  }, duration)
+  }, expectedValues.length)
 })
 
 test('sine - positive endValue', (t) => {
@@ -164,5 +164,5 @@ test('sine - positive endValue', (t) => {
   ]
   times((index) => {
     t.is(getX(index), expectedValues[index])
-  }, duration)
+  }, expectedValues.length)
 })
