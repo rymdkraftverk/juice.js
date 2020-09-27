@@ -1,19 +1,13 @@
 # :tropical_drink: juice.js
 
-Adds juice to your animations
+> Adds juice to your animations
 
 <div>
   <img src="https://badgen.net/npm/v/juice.js?icon=npm" />
   <!-- <img src="https://badgen.net/npm/dw/juice.js?icon=npm" /> -->
-</div>
-<div>
   <img src="https://badgen.net/bundlephobia/minzip/juice.js" />
-</div>
-<div>
   <img src="https://badgen.net/github/last-commit/rymdkraftverk/juice.js?icon=github" />
 </div>
-
-[![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 
 ---
 
@@ -28,8 +22,6 @@ For an introduction to the importance of juice, see the following [video](https:
   > All functions return a function with the signature `(time) => value`
 
 - **Zero dependencies**
-
-[Full API docs](https://rymdkraftverk.github.io/juice.js/)
 
 ---
 
@@ -50,18 +42,18 @@ They all return another function with the signature `(time) => value`.
 This can then be called in an update loop:
 
 ```js
-let time = 0
-update(() => {
-  entity.x = getX(time)
-  time += 1
+onUpdate((time) => {
+  sprite.x = getX(time)
 })
 ```
 
-The returned value can be used to animate any property of a visual element, such as the position, scale and opacity.
+The returned value can be used to animate any property of a visual element, such as the `position`, `scale` or `opacity`.
 
-`time` has to be an integer that starts at 0.
+_Note: `time` has to be an integer that starts at 0._
 
-## Example code
+---
+
+## Example usage
 
 Example uses `pixi.js` but `juice.js` can be used with any application or game that runs within a loop.
 
@@ -90,33 +82,149 @@ app.ticker.add(() => {
 })
 ```
 
-Using [level1](https://github.com/rymdkraftverk/level1) behaviors, it can be shortened to:
-
-```js
-import * as l1 from 'l1'
-
-l1.repeat((counter) => {
-  sprite.x = getX(counter)
-})
-```
-
 ---
 
 ## Available functions
 
----
+_Note: `onUpdate` is a mock update function. You should use a real implementation of this, such as `pixi.js` `ticker`._
 
-## Utils / Modifier functions
+### easeIn
 
-TODO
+Starts slow. Velocity increases over time.
+
+```js
+import * as juice from 'juice.js'
+
+const getX = juice.easeIn({
+  endValue: 100,
+  duration: 60,
+})
+
+onUpdate((time) => {
+  sprite.x = getX(time)
+})
+```
+
+<!-- TODO: Add gif here -->
+
+### easeOut
+
+Starts fast. Velocity decreases over time.
+
+```js
+import * as juice from 'juice.js'
+
+const getX = juice.sine({
+  endValue: 100,
+  duration: 60,
+})
+
+onUpdate((time) => {
+  sprite.x = getX(time)
+})
+```
+
+<!-- TODO: Add gif here -->
+
+### parabola
+
+_Note: `height` is added to the `startValue`_
+
+```js
+import * as juice from 'juice.js'
+
+const getX = juice.parabola({
+  endValue: 100,
+  duration: 60,
+})
+
+onUpdate((time) => {
+  sprite.x = getX(time)
+})
+```
+
+<!-- TODO: Add gif here -->
+
+### sine
+
+```js
+import * as juice from 'juice.js'
+
+const getX = juice.sine({
+  endValue: 100,
+  duration: 60,
+})
+
+onUpdate((time) => {
+  sprite.x = getX(time)
+})
+```
+
+<!-- TODO: Add gif here -->
+
+### easeInOut
+
+```js
+import * as juice from 'juice.js'
+
+const getX = juice.easeInOut({
+  endValue: 100,
+  duration: 60,
+})
+
+onUpdate((time) => {
+  sprite.x = getX(time)
+})
+```
+
+### linear
+
+```js
+import * as juice from 'juice.js'
+
+const getX = juice.linear({
+  endValue: 100,
+  duration: 60,
+})
+
+onUpdate((time) => {
+  sprite.x = getX(time)
+})
+```
+
+<!-- TODO: Add gif here -->
+
+<!-- ## Examples with different game loops
+
+Maybe...
+
+### Mainloop.js
+
+### Pixi.js -->
 
 ---
 
 ## Tips
 
-- The docs and examples use `time` as the input value. Though this will probably be the most common use case, any other value can be the input of the functions.
+- Juice works best when it doesn't interrupt what the player is trying to do! For example, the player should not have to wait for the animation to finish before they can take the next action.
 
-- Juice works best when it doesn't interrupt what the player is trying to do! For example, the player should never have to wait for the animation to finish before they can take the next action.
+- This library works very well with [level1](https://github.com/rymdkraftverk/level1)
+
+Example code:
+
+```js
+import * as l1 from 'l1'
+import * as juice from 'juice.js'
+
+const getX = juice.linear({
+  endValue: 100,
+  duration: 60,
+})
+
+l1.every((counter) => {
+  sprite.x = getX(counter)
+})
+```
 
 ## Develop
 
@@ -128,4 +236,4 @@ TODO
 | `yarn clean`   | Remove the `dist` folder                                      |
 | `yarn release` | Start the process to release a new version                    |
 
-Use the `showcase` app to test any updates. If the public API is changed, also update the `src/FeatureList` file.
+Use the `testApp` app to test any updates. If the public API is changed, also update the `src/FeatureList` file.
