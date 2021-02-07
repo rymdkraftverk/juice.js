@@ -14,13 +14,26 @@ test('linear - positive endValue', (t) => {
   }, duration)
 })
 
-test('linear - negative endValue', (t) => {
+test.only('linear - negative endValue', (t) => {
   const getX = juice.linear({
     endValue: -40,
     duration,
   })
   times((index) => {
-    t.is(getX(index), -8 * index)
+    const expected = -8 * index
+    t.is(getX(index), expected === -0 ? 0 : expected)
+  }, duration)
+})
+
+test('linear - endValue < startValue', (t) => {
+  const startValue = 20
+  const getX = juice.linear({
+    endValue: 10,
+    startValue,
+    duration,
+  })
+  times((index) => {
+    t.is(getX(index), startValue - (-2 * index))
   }, duration)
 })
 
