@@ -36,12 +36,12 @@ export const easeIn = ({
   startValue = 0,
 }: EaseInOptions): juiceFn => {
   const speedParameter =
-    Math.log(1 - startValue + Math.abs(endValue)) / duration
+    Math.log(1 + Math.abs(startValue - endValue)) / duration
 
   const modifier = endValue < startValue ? -1 : 1
 
   return (t) => {
-    return (startValue - 1 + Math.E ** (t * speedParameter)) * modifier
+    return startValue + (Math.E ** (t * speedParameter) - 1) * modifier
   }
 }
 
