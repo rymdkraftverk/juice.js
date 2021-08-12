@@ -95,7 +95,7 @@ test('easeIn - negative endValue', (t) => {
     duration,
   })
   const expectedValues = [
-    -0,
+    0,
     -1.1016324782757847,
     -3.416859073743617,
     -8.282614481346688,
