@@ -95,11 +95,29 @@ test('easeIn - negative endValue', (t) => {
     duration,
   })
   const expectedValues = [
-    -0,
+    0,
     -1.1016324782757847,
     -3.416859073743617,
     -8.282614481346688,
     -18.508644077311324,
+  ]
+  times((index) => {
+    t.is(getX(index), expectedValues[index])
+  }, expectedValues.length)
+})
+
+test('easeIn - endValue < startValue', (t) => {
+  const getX = juice.easeIn({
+    startValue: 60,
+    endValue: 20,
+    duration,
+  })
+  const expectedValues = [
+    60 - 0,
+    60 - 1.1016324782757847,
+    60 - 3.416859073743617,
+    60 - 8.282614481346688,
+    60 - 18.508644077311324,
   ]
   times((index) => {
     t.is(getX(index), expectedValues[index])
