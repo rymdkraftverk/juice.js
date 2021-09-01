@@ -7,8 +7,9 @@
   "scripts": {
     "clean": "rm -f juice.js.tgz",
     "build": "yarn clean && rollup --config rollup.config.js",
+    "version": "yarn build",
     "go": "yarn build && yarn pack --filename juice.js.tgz && cd testApp && yarn refresh && yarn start",
-    "release": "yarn build && yarn audit && np",
+    "release": "yarn build && np",
     "test": "ava"
   },
   "prettier": {
