@@ -14,6 +14,17 @@ test('linear - positive endValue', (t) => {
   }, duration)
 })
 
+test('linear - positive endValue with a set startValue', (t) => {
+  const getX = juice.linear({
+    endValue: 40,
+    startValue: 20,
+    duration,
+  })
+  times((index) => {
+    t.is(getX(index), 20 + 4 * index)
+  }, duration)
+})
+
 test('linear - negative endValue', (t) => {
   const getX = juice.linear({
     endValue: -40,
@@ -25,6 +36,18 @@ test('linear - negative endValue', (t) => {
   }, duration)
 })
 
+test('linear - negative endValue with a set startValue', (t) => {
+  const getX = juice.linear({
+    endValue: -40,
+    startValue: -20,
+    duration,
+  })
+  times((index) => {
+    const expected = -20 + -4 * index
+    t.is(getX(index), expected)
+  }, duration)
+})
+
 test('linear - endValue < startValue', (t) => {
   const startValue = 20
   const getX = juice.linear({
@@ -33,7 +56,7 @@ test('linear - endValue < startValue', (t) => {
     duration,
   })
   times((index) => {
-    const expected = startValue - (2 * index)
+    const expected = startValue - 2 * index
     t.is(getX(index), expected)
   }, duration)
 })

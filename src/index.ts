@@ -73,13 +73,8 @@ export const linear = ({
   duration,
   startValue = 0,
 }: LinearOptions): juiceFn => {
-  if (endValue < startValue){
-    const velocity = (startValue - endValue) / duration
-    return (t) => startValue - (t * velocity)
-  }
   const velocity = (endValue - startValue) / duration
-  
-  return (t) => t * velocity
+  return (t) => startValue + t * velocity
 }
 
 type ParabolaOptions = {
